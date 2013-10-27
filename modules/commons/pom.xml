@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+Copyright (c) Jorge Nunes, All Rights Reserved.
+
+
+Maven POM file for the "jeedemos-commons" sub-project.
+
+ -->
+
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.varmateo.jeedemos</groupId>
+  <artifactId>jeedemos-commons</artifactId>
+  <packaging>jar</packaging>
+
+  <parent>
+    <groupId>com.varmateo.jeedemos</groupId>
+    <artifactId>jeedemos-main</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+
+
+
+
+
+  <dependencies>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+  </dependencies>
+
+
+
+
+
+  <!-- More project information. -->
+
+  <name>Commons API</name>
+
+  <description>Utility classes used by diffent modules of the
+  JEE-Demos software.</description>
+
+
+</project>
+
