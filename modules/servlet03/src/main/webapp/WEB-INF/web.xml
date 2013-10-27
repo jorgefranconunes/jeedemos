@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+   Copyright (c) 2013 Jorge Nunes, All rights reserved.
+-->
+
+<web-app
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+   version="3.0">
+
+  <display-name>Hello World with Logging</display-name>
+
+
+  <!-- The servlet for REST web services. -->
+  <servlet>
+
+    <servlet-name>servlet03</servlet-name>
+    <servlet-class>com.varmateo.jeedemos.servlet03.HelloWorldWithInfo</servlet-class>
+
+    <init-param>
+      <param-name>param01</param-name>
+      <param-value>Value of param01</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>param02</param-name>
+      <param-value>Value of param02</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>stuff</param-name>
+      <param-value>Whatever...&lt;hoho&gt;</param-value>
+    </init-param>
+
+  </servlet>
+
+
+  <!-- The prefix for the REST web services. -->
+  <servlet-mapping>
+    <servlet-name>servlet03</servlet-name>
+    <url-pattern>/HelloWorldWithInfo/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>
+

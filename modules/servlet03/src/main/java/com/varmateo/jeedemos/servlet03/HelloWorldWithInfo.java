@@ -1,0 +1,351 @@
+/**************************************************************************
+ *
+ * Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
+ *
+ **************************************************************************/
+
+package com.varmateo.jeedemos.servlet03;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.varmateo.jeedemos.commons.logging.SimpleLogger;
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+public final class HelloWorldWithInfo
+    extends HttpServlet {
+
+
+
+
+
+    private SimpleLogger _logger = null;
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    public HelloWorldWithInfo() {
+
+        _logger = SimpleLogger.createFor(this);
+
+        _logger.info("Servlet {0} created.",
+                     HelloWorldWithInfo.class.getName());
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    @Override
+    public void init(final ServletConfig config) {
+
+        String servletName = config.getServletName();
+        ParamSet paramSet =
+            new ParamSet() {
+                public final Enumeration<String> keys() {
+                    return config.getInitParameterNames();
+                }
+                public final String getValue(final String key) {
+                    return config.getInitParameter(key);
+                }
+            };
+
+        _logger.info("Servlet \"{0}\" initialized. {1} init parameters:",
+                     servletName,
+                     String.valueOf(paramSet.size()));
+        logParamSet(_logger, paramSet);
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    @Override
+    public void doGet(final HttpServletRequest  request,
+                      final HttpServletResponse response)
+        throws ServletException,
+               IOException {
+
+        response.setContentType("text/plain");
+
+        PrintWriter output = response.getWriter();
+        output.println("Hello, world!");
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    @Override
+    public void service(final HttpServletRequest  request,
+                        final HttpServletResponse response)
+        throws ServletException,
+               IOException {
+
+        _logger.info("Servicing \"{0}\" for \"{1}\"",
+                     request.getMethod(),
+                     request.getRequestURL());
+
+        super.service(request, response);
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private void logParamSet(final SimpleLogger logger,
+                             final ParamSet     paramSet) {
+
+        for ( Param param : paramSet ) {
+            _logger.info("{0} : {1}", param.key(), param.value());
+        }
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private final class Param
+        extends Object {
+
+        private String _key   = null;
+        private String _value = null;
+
+        public Param(final String key,
+                     final String value) {
+            _key   = key;
+            _value = value;
+        }
+
+        public String key() { return _key; }
+        public String value() { return _value; }
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private abstract class ParamSet
+        extends Object
+        implements Iterable<Param> {
+
+
+
+
+
+        private List<Param> _paramList = null;
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        public ParamSet() {
+
+            // Nothing to do.
+        }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        public abstract Enumeration<String> keys();
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        public abstract String getValue(String key);
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        public Iterator<Param> params() {
+
+            initIfRequired();
+
+            Iterator<Param> result = _paramList.iterator();
+
+            return result;
+        }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        public int size() {
+
+            initIfRequired();
+
+            int result = _paramList.size();
+
+            return result;
+        }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        public Iterator<Param> iterator() {
+
+            Iterator<Param> result = params();
+
+            return result;
+        }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        private void initIfRequired() {
+
+            if ( _paramList == null ) {
+                buildParamList();
+            }
+        }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+        private void buildParamList() {
+
+            List<Param> paramList = new ArrayList<Param>();
+
+            for ( Enumeration<String> keys = this.keys();
+                  keys.hasMoreElements(); ) {
+                String key   = keys.nextElement();
+                String value = this.getValue(key);
+                Param  param = new Param(key, value);
+                paramList.add(param);
+            }
+
+            _paramList = paramList;
+        }
+
+
+    }
+
+
+}
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
