@@ -147,7 +147,7 @@ public final class HelloWorldWithInfo
                              final ParamSet     paramSet) {
 
         for ( Param param : paramSet ) {
-            _logger.info("{0} : {1}", param.key(), param.value());
+            _logger.info("\t{0} : {1}", param.key(), param.value());
         }
     }
 
