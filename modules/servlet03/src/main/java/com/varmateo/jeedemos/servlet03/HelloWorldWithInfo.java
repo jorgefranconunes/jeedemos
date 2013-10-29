@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -71,21 +72,8 @@ public final class HelloWorldWithInfo
     @Override
     public void init(final ServletConfig config) {
 
-        String servletName = config.getServletName();
-        ParamSet paramSet =
-            new ParamSet() {
-                public final Enumeration<String> keys() {
-                    return config.getInitParameterNames();
-                }
-                public final String getValue(final String key) {
-                    return config.getInitParameter(key);
-                }
-            };
-
-        _logger.info("Servlet \"{0}\" initialized. {1} init parameters:",
-                     servletName,
-                     String.valueOf(paramSet.size()));
-        logParamSet(_logger, paramSet);
+        _logger.info("Servlet \"{0}\" initialized.", config.getServletName());
+        logServletConfig(_logger, config);
     }
 
 
@@ -131,6 +119,38 @@ public final class HelloWorldWithInfo
                      request.getRequestURL());
 
         super.service(request, response);
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private void logServletConfig(final SimpleLogger  logger,
+                                  final ServletConfig config) {
+
+        ServletContext context = config.getServletContext();
+
+        logger.info("Servlet name    : {0}", config.getServletName());
+        logger.info("Context path    : {0}", context.getContextPath());
+
+        ParamSet paramSet =
+            new ParamSet() {
+                public final Enumeration<String> keys() {
+                    return config.getInitParameterNames();
+                }
+                public final String getValue(final String key) {
+                    return config.getInitParameter(key);
+                }
+            };
+
+        logger.info("Init parameters : {0}", String.valueOf(paramSet.size()));
+        logParamSet(logger, paramSet);
     }
 
 

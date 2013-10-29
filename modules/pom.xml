@@ -22,10 +22,16 @@ Main Maven POM file for the JEE-Demos project.
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+
   <properties>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <ubipol.version>${project.version}</ubipol.version>
+
+    <!-- The port to be used by the Jetty embeded server in tests. -->
+    <jeedemos.jetty.port>8083</jeedemos.jetty.port>
+
   </properties>
+
 
   <modules>
     <module>commons</module>
@@ -39,7 +45,7 @@ Main Maven POM file for the JEE-Demos project.
 
 
   <!-- Define the versions of all dependencies used in all
-       modules. This way the module does not need to refer to the
+       modules. This way each the module does not need to refer to the
        dependency version. -->
 
   <dependencyManagement>
@@ -151,6 +157,12 @@ Main Maven POM file for the JEE-Demos project.
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-maven-plugin</artifactId>
           <version>9.0.6.v20130930</version>
+          <configuration>
+            <httpConnector>
+              <port>${jeedemos.jetty.port}</port>
+            </httpConnector>
+            <scanIntervalSeconds>10</scanIntervalSeconds>
+          </configuration>
         </plugin>
 
         

@@ -49,24 +49,6 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
 
 
 
-  <build>
-
-    <plugins>
-      <plugin>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <configuration>
-          <scanIntervalSeconds>10</scanIntervalSeconds>
-        </configuration>
-      </plugin>
-    </plugins>
-
-  </build>
-
-
-
-
-
   <!-- More project information. -->
 
   <name>Servlet 03</name>
