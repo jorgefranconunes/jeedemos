@@ -15,8 +15,8 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.varmateo.jeedemos</groupId>
-  <artifactId>jeedemos-servlet01</artifactId>
-  <packaging>war</packaging>
+  <artifactId>jeedemos-commons-servlets</artifactId>
+  <packaging>jar</packaging>
 
   <parent>
     <groupId>com.varmateo.jeedemos</groupId>
@@ -32,9 +32,9 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
   <dependencies>
 
     <dependency>
-      <groupId>com.varmateo.jeedemos</groupId>
-      <artifactId>jeedemos-commons-servlets</artifactId>
-      <version>${project.version}</version>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>
@@ -45,9 +45,10 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
 
   <!-- More project information. -->
 
-  <name>Servlet 01</name>
+  <name>Commons Servlet API</name>
 
-  <description>Hello world servlet.</description>
+  <description>Utility classes for use in servlet
+  implementation.</description>
 
 
 </project>

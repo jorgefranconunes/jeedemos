@@ -117,6 +117,7 @@ public final class HelloWorldWithInfo
         _logger.info("Servicing \"{0}\" for \"{1}\"",
                      request.getMethod(),
                      request.getRequestURL());
+        logServletRequest(_logger, request);
 
         super.service(request, response);
     }
@@ -149,7 +150,83 @@ public final class HelloWorldWithInfo
                 }
             };
 
-        logger.info("Init parameters : {0}", String.valueOf(paramSet.size()));
+        logger.info("Init parameters : {0}",
+                    String.valueOf(paramSet.size()));
+        logParamSet(logger, paramSet);
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private void logServletRequest(final SimpleLogger       logger,
+                                   final HttpServletRequest request) {
+
+        logger.info("Method       : {0}", request.getMethod());
+        logger.info("URI          : {0}", request.getRequestURI());
+        logger.info("Protocol     : {0}", request.getProtocol());
+
+        logRequestHeaders(logger, request);
+        logRequestParameters(logger, request);
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private void logRequestHeaders(final SimpleLogger       logger,
+                                   final HttpServletRequest request) {
+
+        ParamSet headerSet =
+            new ParamSet() {
+                public final Enumeration<String> keys() {
+                    return request.getHeaderNames();
+                }
+                public final String getValue(final String key) {
+                    return request.getHeader(key);
+                }
+            };
+
+        logger.info("HTTP headers : {0}", String.valueOf(headerSet.size()));
+        logParamSet(logger, headerSet);
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private void logRequestParameters(final SimpleLogger       logger,
+                                      final HttpServletRequest request) {
+
+        ParamSet paramSet =
+            new ParamSet() {
+                public final Enumeration<String> keys() {
+                    return request.getParameterNames();
+                }
+                public final String getValue(final String key) {
+                    return request.getParameter(key);
+                }
+            };
+
+        logger.info("Parameters   : {0}", String.valueOf(paramSet.size()));
         logParamSet(logger, paramSet);
     }
 

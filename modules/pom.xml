@@ -35,6 +35,7 @@ Main Maven POM file for the JEE-Demos project.
 
   <modules>
     <module>commons</module>
+    <module>commons-servlets</module>
     <module>servlet01</module>
     <module>servlet02</module>
     <module>servlet03</module>

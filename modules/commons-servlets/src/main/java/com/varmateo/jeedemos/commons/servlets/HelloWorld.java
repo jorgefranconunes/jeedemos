@@ -4,7 +4,7 @@
  *
  **************************************************************************/
 
-package com.varmateo.jeedemos.servlet01;
+package com.varmateo.jeedemos.commons.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**************************************************************************
  *
- * 
+ * A simple servlet that always responds "Hello, world!".
  *
  **************************************************************************/
 
@@ -37,6 +37,7 @@ public final class HelloWorld
  *
  **************************************************************************/
 
+    @Override
     public void doGet(final HttpServletRequest  request,
                       final HttpServletResponse response)
         throws ServletException,
