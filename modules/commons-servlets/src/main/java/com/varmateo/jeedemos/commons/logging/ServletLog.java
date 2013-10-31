@@ -9,6 +9,7 @@ package com.varmateo.jeedemos.commons.logging;
 import com.varmateo.jeedemos.commons.logging.Log;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -24,6 +25,20 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface ServletLog
     extends Log {
+
+
+
+
+
+/***************************************************************************
+ *
+ * Logs information about the given <code>ServletContext</code>
+ *
+ * @param conyexy The data to be logged.
+ *
+ ***************************************************************************/
+
+    void log(ServletContext context);
 
 
 

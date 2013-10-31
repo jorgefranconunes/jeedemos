@@ -11,7 +11,16 @@
                        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
    version="3.0">
 
-  <display-name>Hello World</display-name>
+  <display-name>Hello  World</display-name>
+
+  
+  <listener>
+    <listener-class>com.varmateo.jeedemos.commons.servlets.ServletContextListenerWithLog</listener-class>
+  </listener>
+
+  <listener>
+    <listener-class>com.varmateo.jeedemos.commons.servlets.ServletRequestListenerWithLog</listener-class>
+  </listener>
 
 
   <servlet>
@@ -21,8 +30,8 @@
 
 
   <servlet-mapping>
-    <servlet-name>servlet01</servlet-name>
-    <url-pattern>/servlet01</url-pattern>
+    <servlet-name>HelloWorld</servlet-name>
+    <url-pattern>/servlet04</url-pattern>
   </servlet-mapping>
 
 </web-app>

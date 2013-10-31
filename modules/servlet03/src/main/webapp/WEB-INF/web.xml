@@ -14,7 +14,6 @@
   <display-name>Hello World with Logging</display-name>
 
 
-  <!-- The servlet for REST web services. -->
   <servlet>
 
     <servlet-name>servlet03</servlet-name>
@@ -38,10 +37,9 @@
   </servlet>
 
 
-  <!-- The prefix for the REST web services. -->
   <servlet-mapping>
     <servlet-name>servlet03</servlet-name>
-    <url-pattern>/HelloWorldWithInfo/*</url-pattern>
+    <url-pattern>/servlet03/*</url-pattern>
   </servlet-mapping>
 
 </web-app>

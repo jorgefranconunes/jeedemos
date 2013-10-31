@@ -39,6 +39,7 @@ Main Maven POM file for the JEE-Demos project.
     <module>servlet01</module>
     <module>servlet02</module>
     <module>servlet03</module>
+    <module>servlet04</module>
   </modules>
 
 
@@ -163,6 +164,12 @@ Main Maven POM file for the JEE-Demos project.
               <port>${jeedemos.jetty.port}</port>
             </httpConnector>
             <scanIntervalSeconds>10</scanIntervalSeconds>
+            <systemProperties>
+              <systemProperty>
+                <name>java.util.logging.config.file</name>
+                <value>${basedir}/../commons/src/test/resources/logging.properties</value>
+              </systemProperty>
+            </systemProperties>
           </configuration>
         </plugin>
 

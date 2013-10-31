@@ -14,19 +14,15 @@
   <display-name>Hello World with Logging</display-name>
 
 
-  <!-- The servlet for REST web services. -->
   <servlet>
-
     <servlet-name>servlet02</servlet-name>
     <servlet-class>com.varmateo.jeedemos.servlet02.HelloWorldWithLogging</servlet-class>
-
   </servlet>
 
 
-  <!-- The prefix for the REST web services. -->
   <servlet-mapping>
     <servlet-name>servlet02</servlet-name>
-    <url-pattern>/HelloWorldWithLogging/*</url-pattern>
+    <url-pattern>/servlet02/*</url-pattern>
   </servlet-mapping>
 
 </web-app>

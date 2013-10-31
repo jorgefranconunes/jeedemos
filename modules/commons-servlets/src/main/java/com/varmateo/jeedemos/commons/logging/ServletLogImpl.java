@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import com.varmateo.jeedemos.commons.logging.Log;
@@ -53,12 +54,27 @@ class ServletLogImpl
 
 /***************************************************************************
  *
- * Logs information about the given <code>ServletConfig</code>
- *
- * @param config The data to be logged.
+ * {@inheritDoc}
  *
  ***************************************************************************/
 
+    @Override
+    public void log(final ServletContext context) {
+
+        logServletContext(this, context);
+    }
+
+
+
+
+
+/***************************************************************************
+ *
+ * {@inheritDoc}
+ *
+ ***************************************************************************/
+
+    @Override
     public void log(final ServletConfig config) {
 
         logServletConfig(this, config);
@@ -70,15 +86,51 @@ class ServletLogImpl
 
 /***************************************************************************
  *
- * Logs information about the given <code>HttpServletRequest</code>.
- *
- * @param request The data to be logged.
+ * {@inheritDoc}
  *
  ***************************************************************************/
 
+    @Override
     public void log(final HttpServletRequest request) {
 
         logServletRequest(this, request);
+    }
+
+
+
+
+
+/**************************************************************************
+ *
+ * 
+ *
+ **************************************************************************/
+
+    private void logServletContext(final Log            log,
+                                   final ServletContext context) {
+
+        log.info("Context name : {0}", context.getServletContextName());
+        log.info("Context path : {0}", context.getContextPath());
+        log.info("Spec version : {0}.{1} - {2}.{3}",
+                 context.getMajorVersion(),
+                 context.getMinorVersion(),
+                 context.getEffectiveMajorVersion(),
+                 context.getEffectiveMinorVersion());
+        log.info("Server info  : {0}", context.getServerInfo());
+
+        ParamSet paramSet =
+            new ParamSet() {
+                public final Enumeration<String> keys() {
+                    return context.getInitParameterNames();
+                }
+                public final String getValue(final String key) {
+                    return context.getInitParameter(key);
+                }
+            };
+
+        log.info("Init parameters : {0}",
+                    String.valueOf(paramSet.size()));
+        logParamSet(log, paramSet);
     }
 
 
