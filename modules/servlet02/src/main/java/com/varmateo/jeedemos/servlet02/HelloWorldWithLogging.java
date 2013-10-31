@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.varmateo.jeedemos.commons.logging.SimpleLogger;
+import com.varmateo.jeedemos.commons.logging.Log;
+import com.varmateo.jeedemos.commons.logging.LogFactory;
 
 
 
@@ -34,7 +35,7 @@ public final class HelloWorldWithLogging
 
 
 
-    private SimpleLogger _logger = null;
+    private Log _logger = null;
 
 
 
@@ -48,7 +49,7 @@ public final class HelloWorldWithLogging
 
     public HelloWorldWithLogging() {
 
-        _logger = SimpleLogger.createFor(this);
+        _logger = LogFactory.createFor(this);
 
         _logger.info("Servlet instance created.");
     }

@@ -37,6 +37,12 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.varmateo.jeedemos</groupId>
+      <artifactId>jeedemos-commons</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
   </dependencies>
 
 

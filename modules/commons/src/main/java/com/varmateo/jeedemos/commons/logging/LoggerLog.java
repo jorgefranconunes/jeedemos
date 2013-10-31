@@ -10,29 +10,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.LogRecord;
 
+import com.varmateo.jeedemos.commons.logging.Log;
+
 
 
 
 
 /***************************************************************************
  *
- * Provides utility methods for logging. It wraps a Java
- * <code>Logger</code> and provides utility methods going beyond those
- * available from the Java <code>Logger</code>.
+ * A <code>Log</code> implementation using Java <code>Logger</code>
+ * instances.
  *
  ***************************************************************************/
 
-public final class SimpleLogger
-    extends Object {
+final class LoggerLog
+    extends Object
+    implements Log {
 
 
 
 
-
-    /**
-     * A <code>SimpleLogger</code> instance that does nothing.
-     */
-    public static final SimpleLogger NULL_LOGGER = create(null);
 
     private Logger _logger = null;
 
@@ -46,87 +43,9 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
-    private SimpleLogger(final Logger logger) {
+    public LoggerLog(final Logger logger) {
 
         _logger = logger;
-    }
-
-
-
-
-
-/***************************************************************************
- *
- * Creates a <code>SimpleLogger</code> that will use as output the
- * given <code>Logger</code> instance.
- *
- * <p>If the given logger is null then no logging will take place.</p>
- *
- * @param logger Will be used as output.
- *
- * @return A newly created <code>SimpleLogger</code>.
- *
- ***************************************************************************/
-
-    public static SimpleLogger create(final Logger logger) {
-
-        SimpleLogger result = new SimpleLogger(logger);
-
-        return result;
-    }
-
-
-
-
-
-/***************************************************************************
- *
- * Creates a <code>SimpleLogger</code> assigning it as subsystem name
- * the class name of the given object.
- *
- * @param obj Object whose class name will be used as subsystem name
- * for the logger.
- *
- * @return A newly created <code>SimpleLogger</code> with an
- * underlying Java <code>Logger</code> using the given object class
- * name as sybsystem name.
- *
- ***************************************************************************/
-
-    public static SimpleLogger createFor(final Object obj) {
-
-        String       className  = obj.getClass().getName();
-        Logger       javaLogger = Logger.getLogger(className);
-        SimpleLogger logger     = create(javaLogger);
-
-        return logger;
-    }
-
-
-
-
-
-/***************************************************************************
- *
- * Creates a <code>SimpleLogger</code> assigning it as subsystem name
- * the name of the given class.
- *
- * @param klass The class whose name will be used as subsystem name
- * for the logger.
- *
- * @return A newly created <code>SimpleLogger</code> with an
- * underlying Java <code>Logger</code> using the name of the given
- * class as sybsystem name.
- *
- ***************************************************************************/
-
-    public static SimpleLogger createFor(final Class<?> klass) {
-
-        String       className  = klass.getName();
-        Logger       javaLogger = Logger.getLogger(className);
-        SimpleLogger logger     = create(javaLogger);
-
-        return logger;
     }
 
 
@@ -139,11 +58,11 @@ public final class SimpleLogger
  * used as output.
  *
  * @return The Java <code>Logger</code> underlying this
- * <code>SimpleLogger</code>.
+ * <code>LoggerLog</code>.
  *
  ***************************************************************************/
 
-    public Logger getJavaLogger() {
+    public Logger getLogger() {
 
         return _logger;
     }
@@ -178,6 +97,7 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
+    @Override
     public void warning(final String msg) {
 
         log(Level.WARNING, msg, null);
@@ -198,6 +118,7 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
+    @Override
     public void warning(final String    msg,
                         final Object... fmtArgs) {
 
@@ -221,6 +142,7 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
+    @Override
     public void warning(final Throwable error,
                         final String    msg,
                         final Object... fmtArgs) {
@@ -240,6 +162,7 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
+    @Override
     public void info(final String msg) {
 
         log(Level.INFO, msg, null);
@@ -260,6 +183,7 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
+    @Override
     public void info(final String    msg,
                      final Object... fmtArgs) {
 
@@ -278,6 +202,7 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
+    @Override
     public void debug(final String msg) {
 
         log(Level.FINE, msg, null);
@@ -298,6 +223,7 @@ public final class SimpleLogger
  *
  ***************************************************************************/
 
+    @Override
     public void debug(final String    msg,
                       final Object... fmtArgs) {
 

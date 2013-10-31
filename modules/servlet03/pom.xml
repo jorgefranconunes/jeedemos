@@ -39,7 +39,7 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
 
     <dependency>
       <groupId>com.varmateo.jeedemos</groupId>
-      <artifactId>jeedemos-commons</artifactId>
+      <artifactId>jeedemos-commons-servlets</artifactId>
       <version>${project.version}</version>
     </dependency>
 

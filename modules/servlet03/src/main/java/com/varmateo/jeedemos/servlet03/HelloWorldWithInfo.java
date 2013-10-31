@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.varmateo.jeedemos.commons.logging.SimpleLogger;
+import com.varmateo.jeedemos.commons.logging.ServletLog;
+import com.varmateo.jeedemos.commons.logging.ServletLogFactory;
 
 
 
@@ -39,7 +40,7 @@ public final class HelloWorldWithInfo
 
 
 
-    private SimpleLogger _logger = null;
+    private ServletLog _log = null;
 
 
 
@@ -53,10 +54,9 @@ public final class HelloWorldWithInfo
 
     public HelloWorldWithInfo() {
 
-        _logger = SimpleLogger.createFor(this);
+        _log = ServletLogFactory.createFor(this);
 
-        _logger.info("Servlet {0} created.",
-                     HelloWorldWithInfo.class.getName());
+        _log.info("Servlet {0} created.", HelloWorldWithInfo.class.getName());
     }
 
 
@@ -72,8 +72,8 @@ public final class HelloWorldWithInfo
     @Override
     public void init(final ServletConfig config) {
 
-        _logger.info("Servlet \"{0}\" initialized.", config.getServletName());
-        logServletConfig(_logger, config);
+        _log.info("Servlet \"{0}\" initialized.", config.getServletName());
+        _log.log(config);
     }
 
 
@@ -114,323 +114,12 @@ public final class HelloWorldWithInfo
         throws ServletException,
                IOException {
 
-        _logger.info("Servicing \"{0}\" for \"{1}\"",
-                     request.getMethod(),
-                     request.getRequestURL());
-        logServletRequest(_logger, request);
+        _log.info("Servicing \"{0}\" for \"{1}\"",
+                  request.getMethod(),
+                  request.getRequestURL());
+        _log.log(request);
 
         super.service(request, response);
-    }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-    private void logServletConfig(final SimpleLogger  logger,
-                                  final ServletConfig config) {
-
-        ServletContext context = config.getServletContext();
-
-        logger.info("Servlet name    : {0}", config.getServletName());
-        logger.info("Context path    : {0}", context.getContextPath());
-
-        ParamSet paramSet =
-            new ParamSet() {
-                public final Enumeration<String> keys() {
-                    return config.getInitParameterNames();
-                }
-                public final String getValue(final String key) {
-                    return config.getInitParameter(key);
-                }
-            };
-
-        logger.info("Init parameters : {0}",
-                    String.valueOf(paramSet.size()));
-        logParamSet(logger, paramSet);
-    }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-    private void logServletRequest(final SimpleLogger       logger,
-                                   final HttpServletRequest request) {
-
-        logger.info("Method       : {0}", request.getMethod());
-        logger.info("URI          : {0}", request.getRequestURI());
-        logger.info("Protocol     : {0}", request.getProtocol());
-
-        logRequestHeaders(logger, request);
-        logRequestParameters(logger, request);
-    }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-    private void logRequestHeaders(final SimpleLogger       logger,
-                                   final HttpServletRequest request) {
-
-        ParamSet headerSet =
-            new ParamSet() {
-                public final Enumeration<String> keys() {
-                    return request.getHeaderNames();
-                }
-                public final String getValue(final String key) {
-                    return request.getHeader(key);
-                }
-            };
-
-        logger.info("HTTP headers : {0}", String.valueOf(headerSet.size()));
-        logParamSet(logger, headerSet);
-    }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-    private void logRequestParameters(final SimpleLogger       logger,
-                                      final HttpServletRequest request) {
-
-        ParamSet paramSet =
-            new ParamSet() {
-                public final Enumeration<String> keys() {
-                    return request.getParameterNames();
-                }
-                public final String getValue(final String key) {
-                    return request.getParameter(key);
-                }
-            };
-
-        logger.info("Parameters   : {0}", String.valueOf(paramSet.size()));
-        logParamSet(logger, paramSet);
-    }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-    private void logParamSet(final SimpleLogger logger,
-                             final ParamSet     paramSet) {
-
-        for ( Param param : paramSet ) {
-            _logger.info("\t{0} : {1}", param.key(), param.value());
-        }
-    }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-    private final class Param
-        extends Object {
-
-        private String _key   = null;
-        private String _value = null;
-
-        public Param(final String key,
-                     final String value) {
-            _key   = key;
-            _value = value;
-        }
-
-        public String key() { return _key; }
-        public String value() { return _value; }
-    }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-    private abstract class ParamSet
-        extends Object
-        implements Iterable<Param> {
-
-
-
-
-
-        private List<Param> _paramList = null;
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        public ParamSet() {
-
-            // Nothing to do.
-        }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        public abstract Enumeration<String> keys();
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        public abstract String getValue(String key);
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        public Iterator<Param> params() {
-
-            initIfRequired();
-
-            Iterator<Param> result = _paramList.iterator();
-
-            return result;
-        }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        public int size() {
-
-            initIfRequired();
-
-            int result = _paramList.size();
-
-            return result;
-        }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        public Iterator<Param> iterator() {
-
-            Iterator<Param> result = params();
-
-            return result;
-        }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        private void initIfRequired() {
-
-            if ( _paramList == null ) {
-                buildParamList();
-            }
-        }
-
-
-
-
-
-/**************************************************************************
- *
- * 
- *
- **************************************************************************/
-
-        private void buildParamList() {
-
-            List<Param> paramList = new ArrayList<Param>();
-
-            for ( Enumeration<String> keys = this.keys();
-                  keys.hasMoreElements(); ) {
-                String key   = keys.nextElement();
-                String value = this.getValue(key);
-                Param  param = new Param(key, value);
-                paramList.add(param);
-            }
-
-            _paramList = paramList;
-        }
-
-
     }
 
 
