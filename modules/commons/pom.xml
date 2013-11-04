@@ -28,6 +28,10 @@ Maven POM file for the "jeedemos-commons" sub-project.
     <relativePath>..</relativePath>
   </parent>
 
+  <properties>
+    <jeedemos.basedir>${basedir}/..</jeedemos.basedir>
+  </properties>
+
 
 
 

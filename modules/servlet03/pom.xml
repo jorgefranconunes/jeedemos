@@ -25,6 +25,10 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
     <relativePath>..</relativePath>
   </parent>
 
+  <properties>
+    <jeedemos.basedir>${basedir}/..</jeedemos.basedir>
+  </properties>
+
 
 
 
