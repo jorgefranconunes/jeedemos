@@ -26,6 +26,7 @@ Main Maven POM file for the JEE-Demos project.
   <properties>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- The port to be used by the Jetty embeded server in tests. -->
     <jeedemos.jetty.port>8083</jeedemos.jetty.port>
@@ -58,6 +59,25 @@ Main Maven POM file for the JEE-Demos project.
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.11</version>
+      </dependency>
+
+      <!-- Jetty -->
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-client</artifactId>
+        <version>9.0.6.v20130930</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-server</artifactId>
+        <version>9.0.6.v20130930</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-servlet</artifactId>
+        <version>9.0.6.v20130930</version>
       </dependency>
 
       <!-- Servlet 3.0 -->
@@ -135,6 +155,40 @@ Main Maven POM file for the JEE-Demos project.
           <configuration>
             <!-- Show exception stack traces of tests in stdout. -->
             <useFile>false</useFile>
+
+            <systemProperties>
+
+              <!-- Configuration of java.util.logging specific for
+                   unit tests. -->
+              <property>
+                <name>java.util.logging.config.file</name>
+                <value>${basedir}/../commons/src/test/resources/logging.properties</value>
+              </property>
+            </systemProperties>
+
+          </configuration>
+        </plugin>
+
+
+        <!-- JUnit tests configuration -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>2.16</version>
+          <configuration>
+            <!-- Show exception stack traces of tests in stdout. -->
+            <useFile>false</useFile>
+
+            <systemProperties>
+
+              <!-- Configuration of java.util.logging specific for
+                   integration tests. -->
+              <property>
+                <name>java.util.logging.config.file</name>
+                <value>${basedir}/../commons/src/test/resources/logging.properties</value>
+              </property>
+            </systemProperties>
+
           </configuration>
         </plugin>
 
@@ -164,10 +218,11 @@ Main Maven POM file for the JEE-Demos project.
               <port>${jeedemos.jetty.port}</port>
             </httpConnector>
             <scanIntervalSeconds>10</scanIntervalSeconds>
+            <useTestScope>true</useTestScope>
             <systemProperties>
               <systemProperty>
                 <name>java.util.logging.config.file</name>
-                <value>${basedir}/../commons/src/test/resources/logging.properties</value>
+                <value>${basedir}/../commons-tests/src/main/resources/logging.properties</value>
               </systemProperty>
             </systemProperties>
           </configuration>
@@ -177,6 +232,27 @@ Main Maven POM file for the JEE-Demos project.
       </plugins>
 
     </pluginManagement>
+
+
+    <!-- -->
+
+    <plugins>
+
+      <!-- Perform integration tests. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
 
   </build>
 

@@ -137,7 +137,7 @@ public final class PlainFormatter
                 fmtArgs[i] =
                     (inputFmtArg!=null) ? inputFmtArg.toString() : null;
             }
-            msg = MessageFormat.format(msgFmt, fmtArgs);
+            msg = MessageFormat.format(msgFmt, (Object[])fmtArgs);
         } else {
             msg = msgFmt;
         }

@@ -15,8 +15,8 @@
 
 
   <servlet>
-    <servlet-name>HelloWorld</servlet-name>
-    <servlet-class>com.varmateo.jeedemos.commons.servlets.HelloWorld</servlet-class>
+    <servlet-name>servlet01</servlet-name>
+    <servlet-class>com.varmateo.jeedemos.commons.servlets.HelloWorldServlet</servlet-class>
   </servlet>
 
 

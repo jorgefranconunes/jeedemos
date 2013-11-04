@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  **************************************************************************/
 
-public final class HelloWorld
+public final class HelloWorldServlet
     extends HttpServlet {
 
 
@@ -46,7 +46,7 @@ public final class HelloWorld
         response.setContentType("text/plain");
 
         PrintWriter output = response.getWriter();
-        output.println("Hello, world!");
+        output.print("Hello, world!");
     }
 
 
