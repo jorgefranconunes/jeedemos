@@ -1,0 +1,65 @@
+/**************************************************************************
+ *
+ * Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
+ *
+ **************************************************************************/
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+def myJavaSourceLevel    = 1.6
+def myAlwaysRunUnitTests = false
+
+
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileJava.sourceCompatibility = myJavaSourceLevel
+
+
+
+
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+}
+
+
+
+
+
+test { 
+    beforeTest { descriptor ->
+    //     logger.lifecycle("Running test: " + descriptor)
+    // println "Running test: " + descriptor
+    }
+
+    // System properties specified on the Gradle command line will
+    // also be known by the unit tests.
+    systemProperties = System.properties
+
+    logging.captureStandardOutput LogLevel.LIFECYCLE
+
+    testLogging { 
+        events "PASSED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
+        // showStandardStreams true
+        showStackTraces true
+        exceptionFormat "FULL"
+    }
+
+    // Run the tests everytime.
+    outputs.upToDateWhen { !myAlwaysRunUnitTests }
+}
+
+
+
+
+
+run { 
+    main = System.getProperty("mainClass");
+}
+
