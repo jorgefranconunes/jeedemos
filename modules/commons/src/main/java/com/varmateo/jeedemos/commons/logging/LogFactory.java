@@ -8,6 +8,7 @@ package com.varmateo.jeedemos.commons.logging;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
 import com.varmateo.jeedemos.commons.logging.LoggerLog;
@@ -24,6 +25,12 @@ import com.varmateo.jeedemos.commons.logging.LoggerLog;
 
 public final class LogFactory
     extends Object {
+
+
+
+
+
+    private static boolean _isFirstTime = true;
 
 
 
@@ -46,6 +53,29 @@ public final class LogFactory
 
 /***************************************************************************
  *
+ *
+ *
+ ***************************************************************************/
+
+    private static void initializeIfRequired() {
+
+        if ( _isFirstTime ) {
+            _isFirstTime = false;
+
+            try {
+                LogManager.getLogManager().readConfiguration();
+            } catch ( java.io.IOException e ) {
+                // Never mind...
+            }
+        }
+    }
+
+
+
+
+
+/***************************************************************************
+ *
  * Creates a <code>Log</code> that will use as output the given
  * <code>Logger</code> instance.
  *
@@ -58,6 +88,8 @@ public final class LogFactory
  ***************************************************************************/
 
     public static Log create(final Logger logger) {
+
+        initializeIfRequired();
 
         LoggerLog result = new LoggerLog(logger);
 
@@ -83,6 +115,8 @@ public final class LogFactory
  ***************************************************************************/
 
     public static Log createFor(final Object obj) {
+
+        initializeIfRequired();
 
         String className  = obj.getClass().getName();
         Logger javaLogger = Logger.getLogger(className);
@@ -110,6 +144,8 @@ public final class LogFactory
  ***************************************************************************/
 
     public static Log createFor(final Class<?> klass) {
+
+        initializeIfRequired();
 
         String className  = klass.getName();
         Logger javaLogger = Logger.getLogger(className);

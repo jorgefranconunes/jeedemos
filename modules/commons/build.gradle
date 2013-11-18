@@ -32,11 +32,7 @@ dependencies {
 
 
 
-test { 
-    beforeTest { descriptor ->
-    //     logger.lifecycle("Running test: " + descriptor)
-    // println "Running test: " + descriptor
-    }
+test {
 
     // System properties specified on the Gradle command line will
     // also be known by the unit tests.

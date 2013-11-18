@@ -1,5 +1,7 @@
 *~
 *.aux
+build
+.gradle
 *.log
 *.out
 *.pid
