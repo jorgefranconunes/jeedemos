@@ -71,10 +71,16 @@ public final class ServletRequestListenerWithLog
 
         ServletRequest request = event.getServletRequest();
 
-        _log.info("Received \"{0}\" request.", request.getProtocol());
-
         if ( request instanceof HttpServletRequest ) {
-            _log.log((HttpServletRequest)request);
+            HttpServletRequest httpRequest = (HttpServletRequest)request;
+
+            _log.info("Received \"{0}\" request ({1}).",
+                      httpRequest.getMethod(),
+                      request.getProtocol());
+            _log.log(httpRequest);
+        } else {
+            _log.info("Received \"{0}\" request.",
+                      request.getProtocol());
         }
 
         long startTime = System.nanoTime();
@@ -100,9 +106,18 @@ public final class ServletRequestListenerWithLog
         long           endTime   = System.nanoTime();
         long           delay     = endTime - startTime;
 
-        _log.info("Done with \"{0}\" request. Delay: {1} ns",
-                  request.getProtocol(),
-                  Long.valueOf(delay));
+        if ( request instanceof HttpServletRequest ) {
+            HttpServletRequest httpRequest = (HttpServletRequest)request;
+
+            _log.info("Done with \"{0}\" request ({1}). Delay: {1} ns",
+                      httpRequest.getMethod(),
+                      request.getProtocol(),
+                      Long.valueOf(delay));
+        } else {
+            _log.info("Done with \"{0}\" request. Delay: {1} ns",
+                      request.getProtocol(),
+                      Long.valueOf(delay));
+        }
     }
 
 }

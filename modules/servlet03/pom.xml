@@ -57,8 +57,15 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
 
   <name>Servlet 03</name>
 
-  <description>Hello world servlet with logging of configuration
-  details.</description>
+  <description>
+This project is intended to ilustrate accessing the information on
+ServletConfig and HttpServletRequest. The provided servlet logs
+information about the ServletConfig at initialization time and about
+the HttpServletRequest for every request. It uses the java.util.log
+logging framework. The implementation of the servlet is minimalist and
+it always responds to all GET requests always with the same hard-coded
+content.
+  </description>
 
 
 </project>

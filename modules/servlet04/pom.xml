@@ -51,8 +51,14 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
 
   <name>Servlet 04</name>
 
-  <description>Hello world servlet with logging through
-  listeners.</description>
+  <description>
+This project is intended to ilustrate the use of
+ServletContextListener and ServletRequestListner. The provided demo
+listeners just log information as they handle events received from the
+servlet container. The implementation of the servlet is minimalist and
+it always responds to all GET requests always with the same hard-coded
+content.
+</description>
 
 
 </project>

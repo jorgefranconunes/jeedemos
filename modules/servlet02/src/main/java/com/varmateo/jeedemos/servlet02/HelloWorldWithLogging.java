@@ -24,7 +24,8 @@ import com.varmateo.jeedemos.commons.logging.LogFactory;
 
 /**************************************************************************
  *
- * 
+ * A simple servlet that produces log messages for some life-cycle
+ * events and for all requests.
  *
  **************************************************************************/
 
@@ -35,7 +36,7 @@ public final class HelloWorldWithLogging
 
 
 
-    private Log _logger = null;
+    private Log _log = null;
 
 
 
@@ -49,9 +50,9 @@ public final class HelloWorldWithLogging
 
     public HelloWorldWithLogging() {
 
-        _logger = LogFactory.createFor(this);
+        _log = LogFactory.createFor(this);
 
-        _logger.info("Servlet instance created.");
+        _log.info("Servlet instance created.");
     }
 
 
@@ -69,7 +70,7 @@ public final class HelloWorldWithLogging
 
         String servletName = config.getServletName();
 
-        _logger.info("Servlet \"{0}\" is being initialized.", servletName);
+        _log.info("Servlet \"{0}\" is being initialized.", servletName);
     }
 
 
@@ -110,7 +111,7 @@ public final class HelloWorldWithLogging
         throws ServletException,
                IOException {
 
-        _logger.info("Servicing \"{0}\" for \"{1}\"",
+        _log.info("Servicing \"{0}\" for \"{1}\"",
                      request.getMethod(),
                      request.getRequestURL());
 

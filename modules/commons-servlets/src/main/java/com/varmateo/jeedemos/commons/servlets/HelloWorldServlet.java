@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**************************************************************************
  *
- * A simple servlet that always responds "Hello, world!".
+ * A simple servlet that always responds "Hello, world!" to GET
+ * requests.
  *
  **************************************************************************/
 

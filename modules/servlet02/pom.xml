@@ -57,7 +57,14 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
 
   <name>Servlet 02</name>
 
-  <description>Hello world servlet with logging.</description>
+  <description>
+This project is intended to ilustrate some events in the servlet
+lifecycle, namely init() and service(). This project provides a
+servlet that generates log messages during initialization and when a
+request is processed. It uses the java.util.log logging framework. The
+implementation of the servlet is minimalist and it always responds to
+all GET requests always with the same hard-coded content.
+  </description>
 
 
 </project>

@@ -51,7 +51,9 @@ Copyright (c) 2013 Jorge Nunes, All Rights Reserved.
 
   <name>Servlet 01</name>
 
-  <description>Hello world servlet.</description>
+  <description>This project provides a minimalist implementation of a
+  servlet that responds to all GET requests always with the same
+  hard-coded content.</description>
 
 
 </project>
