@@ -1,0 +1,17 @@
+= Simple sbt project
+
+A minimalistic sbt project.
+
+
+To build:
+
+----
+sbt package
+----
+
+
+To run in the development environment:
+
+----
+sbt run
+----
