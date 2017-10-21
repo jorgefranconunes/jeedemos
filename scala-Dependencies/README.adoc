@@ -1,0 +1,17 @@
+= Simple sbt multi-project with dependencies
+
+A multi-project
+
+
+To build:
+
+----
+sbt package
+----
+
+
+To run in the development environment:
+
+----
+sbt projCli/run
+----

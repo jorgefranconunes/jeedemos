@@ -23,3 +23,10 @@ To use on of the sbt-stats plugin tasks:
 sbt stats
 sbt projCli/statsProject
 ----
+
+
+To list enabled plugins:
+
+----
+sbt plugins
+----
