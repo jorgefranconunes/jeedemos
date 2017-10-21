@@ -1,0 +1,25 @@
+= Using Sbt plugins
+
+Sbt plugins add additional settings and tasks.
+
+
+To build:
+
+----
+sbt package
+----
+
+
+To run in the development environment:
+
+----
+sbt projCli/run
+----
+
+
+To use on of the sbt-stats plugin tasks:
+
+----
+sbt stats
+sbt projCli/statsProject
+----
