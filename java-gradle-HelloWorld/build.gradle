@@ -1,7 +1,15 @@
-apply plugin: 'java'
-apply plugin: 'application'
+apply plugin : 'java'
+apply plugin : 'application'
 
 description = 'Hello World demo program'
 version = '1.0'
 
 mainClassName = 'com.varmateo.Main'
+
+jar {
+  manifest {
+    attributes(
+      'Main-Class': mainClassName
+    )
+  }
+}
