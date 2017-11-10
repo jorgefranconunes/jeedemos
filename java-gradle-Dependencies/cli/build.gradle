@@ -1,0 +1,16 @@
+apply plugin : 'java'
+apply plugin : 'application'
+
+mainClassName = 'com.varmateo.Main'
+
+dependencies {
+    compile project(':api')
+    compile 'com.varmateo.yawg:yawg-api:0.9.8'
+}
+
+jar {
+    baseName 'helloworld-cli'
+    manifest {
+        attributes('Main-Class': mainClassName)
+    }
+}
