@@ -11,6 +11,24 @@ dependencies {
 jar {
     baseName 'helloworld-cli'
     manifest {
-        attributes('Main-Class': mainClassName)
+        attributes(
+                "Main-Class": mainClassName,
+                "Class-Path": configurations.runtime.collect { it.getName() }.join (" "))
     }
+}
+
+
+build {
+    dependsOn 'copyDependenciesToLib'
+}
+
+
+/**
+ * Copies all the JARs required for running this application into the
+ * `lib` directory in the project root directory.
+ */
+tasks.create(name: 'copyDependenciesToLib', type: Copy) {
+    from configurations.runtime
+    from jar
+    into "$buildDir/../../lib"
 }
