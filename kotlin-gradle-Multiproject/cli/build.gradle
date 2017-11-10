@@ -1,0 +1,17 @@
+apply plugin : 'kotlin'
+apply plugin : 'application'
+
+mainClassName = 'com.varmateo.MainKt'
+
+dependencies {
+    compile project(':api')
+    compile 'com.varmateo.yawg:yawg-api:0.9.8'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+
+jar {
+    baseName 'helloworld-cli'
+    manifest {
+        attributes('Main-Class': mainClassName)
+    }
+}

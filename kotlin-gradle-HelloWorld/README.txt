@@ -49,12 +49,12 @@ following to your `~/.emacs`:
 To build:
 
 ----
-gw build
+./gradlew build
 ----
 
 
 To run in the development environment:
 
 ----
-gw run
+./gradlew run
 ----

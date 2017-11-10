@@ -1,0 +1,15 @@
+= Simple Gradle multi-project with Kotlin
+
+
+To build:
+
+----
+./gradlew build
+----
+
+
+To run in the development environment:
+
+----
+./gradlew :cli:run
+----
