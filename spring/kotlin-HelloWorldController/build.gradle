@@ -1,0 +1,54 @@
+
+buildscript {
+    ext.kotlin_version = "1.2.0"
+    ext.spring_boot_version = "2.0.0.M7"
+
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/libs-milestone" }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
+    }
+}
+
+// Provided by org.jetbrains.kotlin:kotlin-gradle-plugin
+apply plugin : 'kotlin'
+
+// Provided by org.jetbrains.kotlin:kotlin-allopen
+apply plugin : 'kotlin-spring'
+
+// Provided by org.springframework.boot:spring-boot-gradle-plugin
+apply plugin : 'org.springframework.boot'
+
+
+repositories {
+    mavenCentral()
+
+    // Repo containing the Spring Boot release candidates (we are
+    // using release candidate 2.0.0.M7 of Spring Boot).
+    maven { url "https://repo.spring.io/libs-milestone" }
+}
+
+
+description = 'Spring Hello World controller'
+version = '0.0.1'
+
+
+configurations {
+    // We want to use Jetty, so we need to explicitly remove the
+    // Tomcat dependency transitively included by
+    // spring-boot-starter-web.
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+dependencies {
+    runtime "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+    runtime "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
+    runtime "org.springframework.boot:spring-boot-starter-jetty:${spring_boot_version}"
+    compile "org.springframework.boot:spring-boot-starter-web:${spring_boot_version}"
+}
