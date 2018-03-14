@@ -1,0 +1,35 @@
+apply plugin : 'scala'
+apply plugin : 'application'
+
+mainClassName = 'com.varmateo.Main'
+
+dependencies {
+    compile project(':api')
+    compile 'com.varmateo.yawg:yawg-api:0.9.8'
+    compile "org.scala-lang:scala-library:$scala_version"
+}
+
+jar {
+    baseName 'helloworld-cli'
+    manifest {
+        attributes(
+                "Main-Class": mainClassName,
+                "Class-Path":  configurations.runtime.collect { it.getName() }.join (" "))
+    }
+}
+
+
+build {
+    dependsOn 'copyDependenciesToLib'
+}
+
+
+/**
+ * Copies all the JARs required for running this application into the
+ * `lib` directory in the project root directory.
+ */
+tasks.create(name: 'copyDependenciesToLib', type: Copy) {
+    from configurations.runtime
+    from jar
+    into "$buildDir/../../lib"
+}
