@@ -1,0 +1,31 @@
+= Spring controller in Kotlin
+
+
+To build:
+
+----
+./gradlew build
+----
+
+
+To run in the development environment:
+
+----
+./gradlew bootRun
+----
+
+Or run the Spring Boot application directly from the JAR:
+
+----
+$JAVA_HOME/bin/java -jar ./build/libs/helloworld-0.0.1.jar
+----
+
+
+The Spring Boot server is by default configured to listen for incoming
+HTTP requests in port 8080. To check the existing REST endpoints:
+
+----
+curl -D - 'http://localhost:8080/hello'
+curl -D - 'http://localhost:8080/greetings?name=John'
+curl -D - 'http://localhost:8080/greet-message?input=john'
+----
