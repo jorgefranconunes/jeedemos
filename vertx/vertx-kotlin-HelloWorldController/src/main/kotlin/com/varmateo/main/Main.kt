@@ -13,34 +13,50 @@ const val SERVER_PORT = 8080
 
 
 fun main(args: Array<String>) {
-
-    val vertx: Vertx = Vertx.vertx()
-    val server: HttpServer = createHttpServer(vertx)
-            .listen()
-
+    App().start()
     println("Server has started!")
 }
 
 
-fun createHttpServer(vertx: Vertx): HttpServer {
+class App {
 
-    val options: HttpServerOptions = HttpServerOptions()
-            .setPort(SERVER_PORT)
-    val router: Router = createRouter(vertx)
+    private val httpServer: HttpServer by lazy {
+        createHttpServer(vertx, router)
+    }
+    private val router: Router by lazy {
+        createRouter(vertx, controller)
+    }
+    private val controller: HelloWorldController by lazy(::HelloWorldController)
+    private val vertx: Vertx by lazy(Vertx::vertx)
 
-    return vertx.createHttpServer(options)
-            .requestHandler(router::accept)
-}
+
+    fun start() {
+        httpServer.listen()
+    }
 
 
-fun createRouter(vertx: Vertx): Router {
+    private fun createHttpServer(
+            vertx: Vertx,
+            router: Router): HttpServer {
 
-    val controller = HelloWorldController()
-    val router = Router.router(vertx)
+        val options = HttpServerOptions().setPort(SERVER_PORT)
 
-    router.addRoute(controller.hello)
-    router.addRoute(controller.greetings)
-    router.addRoute(controller.greetMessage);
+        return vertx
+                .createHttpServer(options)
+                .requestHandler(router::accept)
+    }
 
-    return router
+
+    private fun createRouter(
+            vertx: Vertx,
+            controller: HelloWorldController): Router {
+
+        val router = Router.router(vertx)
+
+        router.addRoute(controller.hello)
+        router.addRoute(controller.greetings)
+        router.addRoute(controller.greetMessage);
+
+        return router
+    }
 }
