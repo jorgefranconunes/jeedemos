@@ -1,0 +1,28 @@
+apply plugin : 'java'
+apply plugin : 'application'
+
+
+
+repositories {
+    mavenCentral()
+}
+
+
+description = 'Javalin Hello World controller'
+version = '1.0'
+mainClassName = 'com.varmateo.main.Main'
+
+
+dependencies {
+    compile 'io.javalin:javalin:1.5.0'
+}
+
+
+jar {
+    manifest {
+        attributes (
+            'Main-Class': 'com.varmateo.Main',
+            'Class-Path': configurations.compile.collect { it.getName() }.join(' ')
+        )
+    }
+}

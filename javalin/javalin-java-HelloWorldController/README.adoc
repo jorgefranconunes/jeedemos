@@ -1,4 +1,4 @@
-= REST controller using Vertx.io in Kotlin
+= REST controller using Javalin in Java
 
 
 To build:
@@ -11,10 +11,10 @@ To build:
 To run in the development environment:
 
 ----
-./gradlew run
+./gradlew bootRun
 ----
 
-Or run the  application directly from the JAR:
+Or run the Spring Boot application directly from the JAR:
 
 ----
 $JAVA_HOME/bin/java -jar ./build/libs/helloworld-0.0.1.jar
