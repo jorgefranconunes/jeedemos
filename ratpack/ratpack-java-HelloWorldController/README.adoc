@@ -1,0 +1,24 @@
+= REST controller using Ratpack in Java
+
+
+To build:
+
+----
+./gradlew build
+----
+
+
+To run in the development environment:
+
+----
+./gradlew run
+----
+
+
+To check the existing REST endpoints:
+
+----
+curl -D - 'http://localhost:8080/hello'
+curl -D - 'http://localhost:8080/greetings?name=John'
+curl -D - 'http://localhost:8080/greet-message?input=john'
+----
