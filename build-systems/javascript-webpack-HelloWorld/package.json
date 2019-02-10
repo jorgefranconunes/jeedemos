@@ -1,0 +1,21 @@
+{
+    "name": "javascript-webpack-HelloWorld",
+    "version": "1.0.0",
+    "description": "Simple Webpack project",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack",
+        "start": "webpack-dev-server"
+    },
+    "keywords": [],
+    "author": "Jorge Nunes <jorgefranconunes@gmail.com>",
+    "license": "GPL-3.0-only",
+    "devDependencies": {
+        "clean-webpack-plugin": "^1.0.1",
+        "copy-webpack-plugin": "^4.6.0",
+        "webpack": "^4.29.3",
+        "webpack-cli": "^3.2.3",
+        "webpack-dev-server": "^3.1.14"
+    }
+}

@@ -30,8 +30,9 @@ Main Maven POM file for the JEE-Demos project.
 
     <!-- The port to be used by the Jetty embeded server in tests. -->
     <jeedemos.jetty.port>8083</jeedemos.jetty.port>
-
     <jeedemos.basedir>${basedir}</jeedemos.basedir>
+
+    <jetty.version>9.4.9.v20180320</jetty.version>
 
   </properties>
 
@@ -67,19 +68,19 @@ Main Maven POM file for the JEE-Demos project.
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-client</artifactId>
-        <version>9.0.6.v20130930</version>
+        <version>${jetty.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-server</artifactId>
-        <version>9.0.6.v20130930</version>
+        <version>${jetty.version}</version>
       </dependency>
 
       <dependency>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-servlet</artifactId>
-        <version>9.0.6.v20130930</version>
+        <version>${jetty.version}</version>
       </dependency>
 
       <!-- Servlet 3.0 -->

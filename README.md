@@ -1,4 +1,4 @@
 jeedemos
 ========
 
-JEE demos and experiments
+Demos and experiments.

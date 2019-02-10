@@ -1,0 +1,114 @@
+= Simple Webpack project
+
+
+
+
+
+== Installing Webpack
+
+To install https://webpack.js.org/[Webpack] we need
+https://www.npmjs.com/[NPM] (Node Package Manager).
+
+NPM is part of https://nodejs.org/en/[Node.js]. So we need to install
+Node.js.
+
+To install Node.js it is better to use a Node.js version manager. We
+will use https://github.com/creationix/nvm[NVM]. So we need to
+install NVM.
+
+
+
+
+
+=== Install NVM
+
+Requirements:
+
+* git
+
+
+[source,sh]
+----
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+----
+
+The command above will make the following changes on disk:
+
+* `~/.nvm` -- NVM installation. It is actually a working area of
+  `git@github.com:creationix/nvm.git`checked out on tag v0.34.0.
+
+* ~/.bashrc -- Adds three lines at the end. Those lines define the
+  `NVM_DIR` environment variable (`$HOME/.nvm`), and define the `nvm`
+  alias for executing NVM commands.
+
+In new terminals the `nvm` command will now be available.
+
+
+
+
+
+=== Install Node.js
+
+
+To install the latest stable version of Node.js we use the following
+command:
+
+----
+nvm install --lts
+----
+
+And to confirm it is working:
+
+----
+jfn@richblue:~ $ node -v
+v10.15.1
+jfn@richblue:~ $ npm -v
+6.4.1
+----
+
+So we now have Node.js 10.15.1, and NPM 6.4.1 happily installed and ready to
+be used.
+
+
+
+
+=== Install Webpack
+
+[source,sh]
+----
+cd $MY_PROJECT_DIR
+npm init -y
+npm install --save-dev webpack@4.29.3
+npm install --save-dev webpack-cli@3.2.3
+----
+
+
+
+
+
+== Development workflow
+
+Full build:
+
+----
+npm run build
+----
+
+Result is under directory `./dist`.
+
+
+Local server:
+
+----
+npm run start
+----
+
+The above command will start an HTTP server listening on port
+8080. That HTTP server serves the files under the `dist` directory.
+
+To access the application entry pages access http://localhost:8080/ on
+your browser.
+
+Whenever spme of the source files changes they will be automatically
+re-compiled, and the page on the browser will also be automatically
+reloaded. Quite pratical for quick development turn-around.
