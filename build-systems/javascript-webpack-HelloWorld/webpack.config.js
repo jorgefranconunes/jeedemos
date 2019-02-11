@@ -14,6 +14,12 @@ module.exports = {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist')
     },
+    resolve: {
+        modules: [
+            path.resolve(__dirname, "./src"),
+            "node_modules",
+        ],
+    },
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new CopyWebpackPlugin([

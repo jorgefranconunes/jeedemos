@@ -2,6 +2,11 @@
  *
  */
 
+import Logger from "varmateo/logging/Logger";
+
+
 (function main() {
-    console.log("Hello, world!");
+    const log = Logger.createFor("Demo");
+
+    log.info("Hello, {0}!", "world");
 })();
