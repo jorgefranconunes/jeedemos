@@ -16,6 +16,9 @@ To install Node.js it is better to use a Node.js version manager. We
 will use https://github.com/creationix/nvm[NVM]. So we need to
 install NVM.
 
+Note that this only needs to be done once in the development
+workstation.
+
 
 
 
@@ -88,7 +91,16 @@ npm install --save-dev webpack-cli@3.2.3
 
 == Development workflow
 
-Full build:
+Immediatly after `git clone`:
+
+----
+npm install
+----
+
+The above only needs to be done once in the working area.
+
+
+=== Full build
 
 ----
 npm run build
@@ -97,7 +109,7 @@ npm run build
 Result is under directory `./dist`.
 
 
-Local server:
+=== Local server
 
 ----
 npm run start
@@ -109,6 +121,6 @@ The above command will start an HTTP server listening on port
 To access the application entry pages access http://localhost:8080/ on
 your browser.
 
-Whenever spme of the source files changes they will be automatically
+Whenever some of the source files changes they will be automatically
 re-compiled, and the page on the browser will also be automatically
 reloaded. Quite pratical for quick development turn-around.
