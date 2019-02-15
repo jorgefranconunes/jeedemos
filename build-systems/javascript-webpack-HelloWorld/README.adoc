@@ -86,6 +86,11 @@ npm install --save-dev webpack-cli@3.2.3
 ----
 
 
+----
+npm install --save-dev mocha mocha-webpack webpack-node-externals
+----
+
+
 
 
 
