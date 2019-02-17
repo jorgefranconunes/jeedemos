@@ -4,20 +4,28 @@
 
 const path = require('path');
 const nodeExternals = require("webpack-node-externals");
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 module.exports = {
-    output: {
-        // use absolute paths in sourcemaps (important for debugging via IDE)
-        devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-        devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]'
-    },
+    mode: "development",
     target: "node",
     externals: [nodeExternals()],
-    devtool: "inline-cheap-module-source-map",
+    entry: path.resolve(__dirname, './test/index-test.js'),
+    output: {
+        filename: 'main-test.js',
+        path: path.resolve(__dirname, 'dist')
+    },
     resolve: {
         modules: [
             path.resolve(__dirname, "./src"),
+            path.resolve(__dirname, "./test"),
             "node_modules",
         ],
     },
+    devtool: "inline-source-map",
+    plugins: [
+        new WebpackShellPlugin({
+            onBuildExit: "mocha ./dist/main-test.js"
+        }),
+    ],
 };

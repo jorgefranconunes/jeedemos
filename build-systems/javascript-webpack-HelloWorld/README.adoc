@@ -129,3 +129,10 @@ your browser.
 Whenever some of the source files changes they will be automatically
 re-compiled, and the page on the browser will also be automatically
 reloaded. Quite pratical for quick development turn-around.
+
+
+=== Execute unit tests
+
+----
+npm run test
+----
