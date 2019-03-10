@@ -4,19 +4,14 @@
  *
  **************************************************************************/
 
-package com.varmateo.jeedemos.swing.demo02
+package com.varmateo.jeedemos.swing.demo01
 
 
-object Main {
+object Demo01Main {
 
     def main(args: Array[String]): Unit = {
 
-        if ( args.size < 1 ) {
-            println("Args: label ...")
-            System.exit(1);
-        }
-
-        val app: Demo02App = Demo02App(args)
+        val app: Demo01App = Demo01App("Hello, world!")
 
         app.start()
   }

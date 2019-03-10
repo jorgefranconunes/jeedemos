@@ -4,10 +4,10 @@ Running the demos:
 
 ----
 ./gradlew :demo01:manualTest \
-    -PmainClass=com.varmateo.jeedemos.swing.demo01.Main
+    -PmainClass=com.varmateo.jeedemos.swing.demo01.Demo01Main
 
 ./gradlew :demo02:manualTest \
-    -PmainClass=com.varmateo.jeedemos.swing.demo02.Main \
+    -PmainClass=com.varmateo.jeedemos.swing.demo02.Demo02Main \
     -Pargs1='Hello, world!' \
     -Pargs2='And hello to you, too!'
 ----

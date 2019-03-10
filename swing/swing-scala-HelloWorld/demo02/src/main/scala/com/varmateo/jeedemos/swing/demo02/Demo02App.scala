@@ -23,7 +23,7 @@ object Demo02App {
 }
 
 
-final class Demo02App private (private val _labels: Seq[String]) {
+final class Demo02App private (private val labels: Seq[String]) {
 
 
     def start(): Unit = SwingUtilities.invokeLater(() => setupGui())
@@ -32,7 +32,7 @@ final class Demo02App private (private val _labels: Seq[String]) {
     private def setupGui(): Unit = {
 
         val frame: JFrame = new JFrame(Demo02App.APP_TITLE)
-        val labelsPanel: JComponent = buildLabelsPanel(_labels)
+        val labelsPanel: JComponent = buildLabelsPanel(this.labels)
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
         frame.getContentPane().add(labelsPanel)
