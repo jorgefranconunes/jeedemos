@@ -1,0 +1,55 @@
+/**************************************************************************
+ *
+ * Copyright (c) 2019 Dfx project contributors.
+ *
+ * Task for running manual tests.
+ *
+ **************************************************************************/
+
+
+/**
+ * The following project properties should be defined:
+ *
+ * mainClass -- Fully classified class name of the class to run.
+ *
+ * args1, args2, ... -- Command line arguments for the program to run.
+ */
+task manualTest(type: JavaExec) {
+
+    classpath = sourceSets.test.runtimeClasspath;
+    main = findMainClassName(project);
+    args = findCliArgs(project);
+}
+
+
+/**
+ *
+ */
+private String findMainClassName(final Project project) {
+
+    return project.hasProperty("mainClass") ? project.mainClass : null;
+}
+
+
+/**
+ *
+ */
+private List<String> findCliArgs(final Project project) {
+
+    final List<String> cliArgs = [];
+    int cliArgIndex = 1;
+    boolean isLookingForMoreArgs = true;
+
+    while ( isLookingForMoreArgs ) {
+        final String cliArgPropName = "args" + cliArgIndex;
+
+        if ( project.hasProperty(cliArgPropName) ) {
+            cliArgs.add(project[cliArgPropName]);
+            ++cliArgIndex;
+        } else {
+            isLookingForMoreArgs = false;
+        }
+    }
+
+    return cliArgs;
+}

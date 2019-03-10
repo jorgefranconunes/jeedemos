@@ -1,0 +1,45 @@
+/**************************************************************************
+ *
+ * Copyright (c) 2019 Jorge Nunes
+ *
+ **************************************************************************/
+
+/**
+ *
+ */
+ext.jeedemosVersion = "0.0.1-SNAPSHOT"
+
+
+/**
+ * Versions of dependencies to be used by all sub-projects.
+ */
+ext.assertjVersion = "3.11.1"
+ext.junitVersion = "4.11"
+ext.scalaVersion = "2.12.8"
+
+description = "Swing Demos"
+
+
+/**
+ *
+ */
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+
+/**
+ * Configuration common to all sub-projects
+ */
+subprojects {
+    apply plugin : 'scala'
+
+    version = jeedemosVersion
+    group = "com.varmateo.jeedemos.swing"
+
+    apply from: "${rootDir}/gradle/compileJavaConfig.gradle"
+    apply from: "${rootDir}/gradle/compileScalaConfig.gradle"
+    apply from: "${rootDir}/gradle/manualTest.gradle"
+}

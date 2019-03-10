@@ -1,0 +1,24 @@
+/**************************************************************************
+ *
+ * Copyright (c) 2019 Jorge Nunes
+ *
+ **************************************************************************/
+
+plugins {
+    id "scala"
+}
+
+
+dependencies {
+    implementation "org.scala-lang:scala-library:${scalaVersion}"
+}
+
+
+jar {
+    baseName "demo01"
+    manifest {
+        attributes(
+            "Main-Class": "com.varmateo.dfx.jeedemos.swing.demo01.Main",
+            "Class-Path": configurations.runtimeClasspath.collect { it.getName() }.join (" "))
+    }
+}

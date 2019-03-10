@@ -1,0 +1,13 @@
+= Swing demos
+
+Running the demos:
+
+----
+./gradlew :demo01:manualTest \
+    -PmainClass=com.varmateo.jeedemos.swing.demo01.Main
+
+./gradlew :demo02:manualTest \
+    -PmainClass=com.varmateo.jeedemos.swing.demo02.Main \
+    -Pargs1='Hello, world!' \
+    -Pargs2='And hello to you, too!'
+----
