@@ -19,6 +19,10 @@ task manualTest(type: JavaExec) {
     classpath = sourceSets.test.runtimeClasspath;
     main = findMainClassName(project);
     args = findCliArgs(project);
+    systemProperties = [
+        "awt.useSystemAAFontSettings": "on",
+        "swing.aatext": "true",
+    ];
 }
 
 
