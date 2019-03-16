@@ -33,7 +33,6 @@ public final class BoxPanel {
     private final JPanel              _box;
 
     private boolean _requiresStrut  = false;
-    private int     _componentCount = 0;
 
 
     /**
@@ -101,8 +100,6 @@ public final class BoxPanel {
 	} else {
 	    addVertical(component, fill);
 	}
-
-	++_componentCount;
 
 	return this;
     }
@@ -183,8 +180,6 @@ public final class BoxPanel {
     public BoxPanel removeAll() {
 
 	_requiresStrut  = false;
-	_componentCount = 0;
-
 	_box.removeAll();
 
         return this;

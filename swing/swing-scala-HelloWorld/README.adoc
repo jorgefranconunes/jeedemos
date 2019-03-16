@@ -3,11 +3,17 @@
 Running the demos:
 
 ----
-./gradlew :demo01:manualTest \
+./gradlew :demos:manualTest \
     -PmainClass=com.varmateo.jeedemos.swing.demo01.Demo01Main
 
-./gradlew :demo02:manualTest \
+./gradlew :demos:manualTest \
     -PmainClass=com.varmateo.jeedemos.swing.demo02.Demo02Main \
     -Pargs1='Hello, world!' \
     -Pargs2='And hello to you, too!'
+
+./gradlew :demos:manualTest \
+    -PmainClass=com.varmateo.jeedemos.swing.demo03.Demo03Main \
+    -Pargs1='Button One' \
+    -Pargs2='Another Button' \
+    -Pargs3='Very Verbose Button'
 ----
