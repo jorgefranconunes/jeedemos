@@ -29,7 +29,6 @@ public final class BoxPanel {
     private final BoxPanelOrientation _orientation;
     private final int                 _spacing;
     private final int                 _margin;
-    private final boolean             _sameSize;
     private final JPanel              _box;
 
     private boolean _requiresStrut  = false;
@@ -41,30 +40,18 @@ public final class BoxPanel {
     private BoxPanel(
             final BoxPanelOrientation orientation,
             final int                 spacing,
-            final int                 margin,
-            final boolean             sameSize) {
+            final int                 margin) {
 
 	_orientation = orientation;
 	_spacing     = spacing;
 	_margin      = margin;
-	_sameSize    = sameSize;
 	_box         = new JPanel();
 
 	if ( margin != 0 ) {
 	    _box.setBorder(new EmptyBorder(margin, margin, margin, margin));
 	}
 
-        final LayoutManager layoutManager;
-
-	if ( sameSize ) {
-	    if ( orientation == BoxPanelOrientation.X_AXIS ) {
-		layoutManager = new GridLayout(1, 0, spacing, 0);
-	    } else {
-		layoutManager = new GridLayout(0, 1, 0, spacing);
-	    }
-	} else {
-            layoutManager = new BoxPanelLayout(_box, orientation);
-	}
+        final LayoutManager layoutManager = new BoxPanelLayout(_box, orientation);
 
         _box.setLayout(layoutManager);
     }
@@ -112,18 +99,14 @@ public final class BoxPanel {
             final Component    component,
             final BoxPanelFill fill) {
 
-	if ( _sameSize ) {
-	    addComponent(component, null);
-	} else {
-	    if ( _requiresStrut ) {
-		final Component strut = Box.createHorizontalStrut(_spacing);
-		addComponent(strut, BoxPanelFill.NO);
-	    } else {
-		// For next component.
-		_requiresStrut = true;
-	    }
-	    addComponent(component, fill);
-	}
+        if ( _requiresStrut ) {
+            final Component strut = Box.createHorizontalStrut(_spacing);
+            addComponent(strut, BoxPanelFill.NO);
+        } else {
+            // For next component.
+            _requiresStrut = true;
+        }
+        addComponent(component, fill);
     }
 
 
@@ -134,18 +117,14 @@ public final class BoxPanel {
             final Component    component,
             final BoxPanelFill fill) {
 
-	if ( _sameSize ) {
-	    addComponent(component, null);
-	} else {
-	    if ( _requiresStrut ) {
-		final Component strut = Box.createVerticalStrut(_spacing);
-		addComponent(strut, BoxPanelFill.NO);
-	    } else {
-		// For next component.
-		_requiresStrut = true;
-	    }
-	    addComponent(component, fill);
-	}
+        if ( _requiresStrut ) {
+            final Component strut = Box.createVerticalStrut(_spacing);
+            addComponent(strut, BoxPanelFill.NO);
+        } else {
+            // For next component.
+            _requiresStrut = true;
+        }
+        addComponent(component, fill);
     }
 
 
@@ -191,16 +170,7 @@ public final class BoxPanel {
      */
     public static BoxPanel hBox() {
 
-        return new BoxPanel(BoxPanelOrientation.X_AXIS, DEFAULT_SPACING, 0, false);
-    }
-
-
-    /**
-     *
-     */
-    public static BoxPanel hBoxSameSize() {
-
-        return new BoxPanel(BoxPanelOrientation.X_AXIS, DEFAULT_SPACING, 0, true);
+        return new BoxPanel(BoxPanelOrientation.X_AXIS, DEFAULT_SPACING, 0);
     }
 
 
@@ -209,16 +179,7 @@ public final class BoxPanel {
      */
     public static BoxPanel hBoxWithMargin() {
 
-        return new BoxPanel(BoxPanelOrientation.X_AXIS, DEFAULT_SPACING, DEFAULT_MARGIN, false);
-    }
-
-
-    /**
-     *
-     */
-    public static BoxPanel hBoxSameSizeWithMargin() {
-
-        return new BoxPanel(BoxPanelOrientation.X_AXIS, DEFAULT_SPACING, DEFAULT_MARGIN, true);
+        return new BoxPanel(BoxPanelOrientation.X_AXIS, DEFAULT_SPACING, DEFAULT_MARGIN);
     }
 
 
@@ -227,16 +188,7 @@ public final class BoxPanel {
      */
     public static BoxPanel vBox() {
 
-        return new BoxPanel(BoxPanelOrientation.Y_AXIS, DEFAULT_SPACING, 0, false);
-    }
-
-
-    /**
-     *
-     */
-    public static BoxPanel vBoxSameSize() {
-
-	return new BoxPanel(BoxPanelOrientation.Y_AXIS, DEFAULT_SPACING, 0, true);
+        return new BoxPanel(BoxPanelOrientation.Y_AXIS, DEFAULT_SPACING, 0);
     }
 
 
@@ -245,16 +197,7 @@ public final class BoxPanel {
      */
     public static BoxPanel vBoxWithMargin() {
 
-        return new BoxPanel(BoxPanelOrientation.Y_AXIS, DEFAULT_SPACING, DEFAULT_MARGIN, false);
-    }
-
-
-    /**
-     *
-     */
-    public static BoxPanel vBoxSameSizeWithMargin() {
-
-        return new BoxPanel(BoxPanelOrientation.Y_AXIS, DEFAULT_SPACING, DEFAULT_MARGIN, true);
+        return new BoxPanel(BoxPanelOrientation.Y_AXIS, DEFAULT_SPACING, DEFAULT_MARGIN);
     }
 
 }
