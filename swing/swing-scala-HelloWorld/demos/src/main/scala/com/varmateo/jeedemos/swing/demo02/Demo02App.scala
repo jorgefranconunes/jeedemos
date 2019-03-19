@@ -6,12 +6,14 @@
 
 package com.varmateo.jeedemos.swing.demo02
 
-import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JLabel
+import javax.swing.JPanel
 import javax.swing.SwingUtilities
 
-import com.varmateo.jeedemos.swing.BoxPanel
+import com.varmateo.jeedemos.swing.BoxPanelX
+import com.varmateo.jeedemos.swing.BoxPanelItem._
+import com.varmateo.jeedemos.swing.BoxPanelOrientation
 
 
 object Demo02App {
@@ -32,23 +34,15 @@ final class Demo02App private (private val labels: Seq[String]) {
     private def setupGui(): Unit = {
 
         val frame: JFrame = new JFrame(Demo02App.APP_TITLE)
-        val labelsPanel: JComponent = buildLabelsPanel(this.labels)
+        val labels: Seq[JLabel] = this.labels.map(new JLabel(_))
+        val panel: JPanel = BoxPanelX.create(
+            items = labels.map(Regular(_)),
+            orientation = BoxPanelOrientation.X_AXIS)
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
-        frame.getContentPane().add(labelsPanel)
+        frame.getContentPane().add(panel)
         frame.pack()
         frame.setVisible(true)
-    }
-
-
-    private def buildLabelsPanel(labels: Seq[String]): JComponent = {
-
-        val box: BoxPanel = BoxPanel.vBoxWithMargin()
-
-        labels.map(new JLabel(_))
-            .foreach(box.add(_))
-
-        box.panel
     }
 
 }

@@ -32,7 +32,7 @@ object SameSizeBoxPanel {
         components: Iterable[Component],
         orientation: BoxPanelOrientation = BoxPanelOrientation.X_AXIS,
         spacing: Int = DEFAULT_SPACING,
-        margin: Int = DEFAULT_MARGIN) = {
+        margin: Int = DEFAULT_MARGIN): JPanel = {
 
         val box: JPanel  = new JPanel()
 
