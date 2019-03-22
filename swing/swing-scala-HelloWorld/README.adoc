@@ -16,4 +16,7 @@ Running the demos:
     -Pargs1='Button One' \
     -Pargs2='Another Button' \
     -Pargs3='Very Verbose Button'
+
+./gradlew :demos:manualTest \
+    -PmainClass=com.varmateo.jeedemos.swing.demo04.Demo04Main
 ----

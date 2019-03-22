@@ -11,7 +11,7 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
 
-import com.varmateo.jeedemos.swing.BoxPanelX
+import com.varmateo.jeedemos.swing.BoxPanel
 import com.varmateo.jeedemos.swing.BoxPanelItem._
 import com.varmateo.jeedemos.swing.BoxPanelOrientation
 
@@ -35,7 +35,7 @@ final class Demo02App private (private val labels: Seq[String]) {
 
         val frame: JFrame = new JFrame(Demo02App.APP_TITLE)
         val labels: Seq[JLabel] = this.labels.map(new JLabel(_))
-        val panel: JPanel = BoxPanelX.create(
+        val panel: JPanel = BoxPanel.create(
             items = labels.map(Regular(_)),
             orientation = BoxPanelOrientation.X_AXIS)
 

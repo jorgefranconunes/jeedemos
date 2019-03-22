@@ -22,7 +22,7 @@ import com.varmateo.jeedemos.swing.BoxPanelItem._
  * A factory for containers for laying out components in a row or in a
  * column.
  */
-object BoxPanelX {
+object BoxPanel {
 
 
     private val DEFAULT_SPACING: Int = 8
