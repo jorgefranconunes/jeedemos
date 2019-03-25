@@ -15,9 +15,7 @@ import java.awt.event.WindowListener
 import javax.swing.JButton
 import javax.swing.JComponent
 import javax.swing.JFrame
-import javax.swing.JLabel
 import javax.swing.JPanel
-import javax.swing.SwingConstants
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants
 
@@ -31,7 +29,7 @@ import com.varmateo.jeedemos.swing.BoxPanelItem.Regular
 
 object Demo04App {
 
-    val APP_TITLE = "Demo04"
+    private val APP_TITLE = "Demo04"
 
 
     def apply(): Demo04App = new Demo04App()
@@ -39,6 +37,8 @@ object Demo04App {
 
 
 final class Demo04App private () {
+
+    import Demo04App._
 
 
     private val sizePanel: SizePanel = SizePanel.create
@@ -65,7 +65,7 @@ final class Demo04App private () {
 
     private def createLabel(): JComponent = {
 
-        val label: JLabel = new JLabel("Resize this window!", SwingConstants.CENTER)
+        val label: JComponent = AutofitLabel.create("Resize this window!").component
 
         val onResizeListener: ComponentListener = new ComponentAdapter {
             override def componentResized(event: ComponentEvent): Unit = onResize(label)
@@ -95,7 +95,7 @@ final class Demo04App private () {
 
     private def createMainFrame(): JFrame = {
 
-        val frame: JFrame = new JFrame(Demo04App.APP_TITLE)
+        val frame: JFrame = new JFrame(APP_TITLE)
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE)
 
         val onCloseListener: WindowListener = new WindowAdapter {
