@@ -10,7 +10,7 @@ import java.awt.Graphics
 //import java.awt.Graphics2D
 import javax.swing.JComponent
 import javax.swing.JLabel
-//import javax.swing.SwingConstants
+import javax.swing.SwingConstants
 
 
 object AutofitLabel {
@@ -26,7 +26,6 @@ object AutofitLabel {
 final class AutofitLabel private (text: String) {
 
 
-    //private val label: JLabel = new JLabel(text, SwingConstants.CENTER)
     private val label: JComponent = new AutofitLabelComponent(text)
 
 
@@ -36,7 +35,8 @@ final class AutofitLabel private (text: String) {
     def component: JComponent = label
 
 
-    private final class AutofitLabelComponent (text: String) extends JLabel(text) {
+    private final class AutofitLabelComponent (text: String)
+            extends JLabel(text, SwingConstants.CENTER) {
 
 
         override def paintComponent(g: Graphics): Unit = {
