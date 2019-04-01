@@ -18,6 +18,12 @@ import javax.swing.JLabel
 import javax.swing.SwingConstants
 
 
+case class AutofitLabelDetails(
+    size: Dimension,
+    font: Font,
+    textBoxSize: Dimension)
+
+
 object AutofitLabel {
 
 
@@ -43,7 +49,7 @@ final class AutofitLabel private () {
     /**
      * 
      */
-    def textBoxSize: Dimension = labelComponent.textBoxSize
+    def details: AutofitLabelDetails = labelComponent.details
 
 
     private final class AutofitLabelComponent
@@ -53,7 +59,9 @@ final class AutofitLabel private () {
         private var isFirstPaint: Boolean = true
         private var isTextChanged: Boolean = false
         private var isFontChanged: Boolean = false
+
         private var previousSize: Dimension = new Dimension(0, 0)
+        private var currentFont: Font = getFont
         private var currentTextBoxSize: Dimension = new Dimension(0, 0)
 
 
@@ -66,16 +74,12 @@ final class AutofitLabel private () {
          */
         override def paintComponent(g: Graphics): Unit = {
 
-            performRefitIfNeeded(g)
+            val fittingFont: Font = currentFittingFont(g)
+            g.setFont(fittingFont)
+
+            println(s"**** Panel: ${getSize().width}x${getSize().height}; Text: ${currentTextBoxSize.width}x${currentTextBoxSize.height}; Font: ${this.currentFont.getSize2D}")
 
             super.paintComponent(g)
-
-            // val g2: Graphics2D = g.asInstanceOf[Graphics2D]
-
-            // g.setFont(getFont())
-            // g.setColor(java.awt.Color.BLACK)
-
-            // g2.drawString(text, 0, getHeight)
         }
 
 
@@ -99,27 +103,23 @@ final class AutofitLabel private () {
         }
 
 
-        def textBoxSize: Dimension = this.currentTextBoxSize
+        /**
+         * 
+         */
+        def details: AutofitLabelDetails = AutofitLabelDetails(
+            size = getSize,
+            font = this.currentFont,
+            textBoxSize = this.currentTextBoxSize)
 
 
-        // private def innerSize: Dimension = {
-
-        //     val insets: Insets = getInsets
-        //     val size: Dimension = getSize
-
-        //     new Dimension(
-        //         size.width - insets.left - insets.right,
-        //         size.height - insets.top - insets.bottom)
-
-        // }
-
-
-        private def performRefitIfNeeded(g: Graphics): Unit = {
+        private def currentFittingFont(g: Graphics): Font = {
 
             if ( isRefitNeeded() ) {
                 val g2: Graphics2D = g.asInstanceOf[Graphics2D]
-                performRefit(g2)
+                this.currentFont = fittingFont(g2)
             }
+
+            this.currentFont
         }
 
 
@@ -139,38 +139,75 @@ final class AutofitLabel private () {
         }
 
 
-        private def performRefit(g2: Graphics2D): Unit = {
+        private def fittingFont(g2: Graphics2D): Font = {
 
-            val currentText: String = getText
-            val currentTextSize: Dimension = sizeOfText(currentText, g2)
-            val currentSize: Dimension = getSize //innerSize
+            val (desiredFont: Font, textBoxSize: Dimension) = findFittingFont(
+                text = getText,
+                bounds = getSize,
+                baseFont = g2.getFont,
+                context = g2.getFontRenderContext)
 
-            val fontScaleX: Double = currentSize.width.toDouble / currentTextSize.width.toDouble
-            val fontScaleY: Double = currentSize.height.toDouble / currentTextSize.height.toDouble
-            val fontScale: Double = Math.min(fontScaleX, fontScaleY)
+            this.currentTextBoxSize = textBoxSize
 
-
-            if ( fontScale != 1.0 ) {
-                val currentFont: Font = g2.getFont
-                val scaledFontSize: Double = currentFont.getSize2D * fontScale
-                println(s"*** fontScale = ${fontScale}, scaledFontSize = ${scaledFontSize}")
-                val scaledFont: Font = currentFont.deriveFont(scaledFontSize.toFloat)
-                g2.setFont(scaledFont)
-                this.currentTextBoxSize = sizeOfText(currentText, g2)
-            } else {
-                println(s"*** fontScale = ${fontScale}")
-                this.currentTextBoxSize = currentTextSize
-            }
+            desiredFont
         }
 
+
+        private def findFittingFont(
+            text: String,
+            bounds: Dimension,
+            baseFont: Font,
+            context: FontRenderContext): (Font, Dimension) = {
+
+            val boundsWidth: Int = bounds.width
+            val boundsHeight: Int = bounds.height
+            var lowerSize: Float = 4.0f
+            var upperSize: Float = 288.0f
+            var candidateSize: Float = baseFont.getSize2D
+            var candidateFont: Font = baseFont
+            var textSize: Dimension = sizeOfText(text, candidateFont, context)
+            var isFontFound: Boolean = false
+
+            do {
+                if ( ((upperSize - lowerSize) / lowerSize) <= 0.01f ) {
+                    isFontFound = true
+                } else if ( isAcceptableSize(textSize, bounds) ) {
+                    isFontFound = true
+                } else {
+                    if ( (textSize.width > boundsWidth) || (textSize.height > boundsHeight) ) {
+                        upperSize = candidateSize
+                    } else {
+                        lowerSize = candidateSize
+                    }
+                    candidateSize = (upperSize + lowerSize) / 2.0f
+                    candidateFont = baseFont.deriveFont(candidateSize)
+                    textSize = sizeOfText(text, candidateFont, context)
+                }
+
+            } while ( !isFontFound )
+
+            if ( (textSize.width > boundsWidth) || (textSize.height > boundsHeight) ) {
+                candidateSize = lowerSize
+                candidateFont = baseFont.deriveFont(candidateSize)
+                textSize = sizeOfText(text, candidateFont, context)
+            }
+
+            (candidateFont, textSize)
+        }
+
+
+        private def isAcceptableSize(
+            textSize: Dimension,
+            bounds: Dimension): Boolean =
+            ((textSize.width == bounds.width) && (textSize.height <= bounds.height)) ||
+                ((textSize.width <= bounds.width) && (textSize.height == bounds.height))
 
 
         private def sizeOfText(
             text: String,
-            g2: Graphics2D): Dimension = {
+            font: Font,
+            context: FontRenderContext): Dimension = {
 
-            val font: Font = g2.getFont()
-            val context: FontRenderContext = g2.getFontRenderContext()
             val bounds: Rectangle2D = font.getStringBounds(text, context)
 
             new Dimension(

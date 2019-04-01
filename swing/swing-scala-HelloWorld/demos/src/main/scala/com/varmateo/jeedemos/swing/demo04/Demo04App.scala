@@ -17,6 +17,8 @@ import javax.swing.JComponent
 import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JSeparator
+import javax.swing.SwingConstants
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants
 
@@ -43,8 +45,7 @@ final class Demo04App private () {
 
 
     private val sizePanel: SizePanel = SizePanel.create()
-    //private val autofitLabel: AutofitLabel = AutofitLabel.create()
-    private val autofitLabel: ScalableLabel = ScalableLabel.create()
+    private val autofitLabel: AutofitLabel = AutofitLabel.create()
 
 
     def start(): Unit = perform(() => setupGui())
@@ -55,6 +56,7 @@ final class Demo04App private () {
         val label: JComponent = setupLabel()
         val items: Seq[BoxPanelItem] = Seq(
             Filler(label),
+            Regular(new JSeparator(SwingConstants.HORIZONTAL)),
             Regular(sizePanel.panel),
             Regular(createButtonPanel()))
         val panel: JPanel = BoxPanel.create(items, BoxPanelOrientation.Y_AXIS)
@@ -113,8 +115,7 @@ final class Demo04App private () {
     }
 
 
-    //private def onResize(autofitLabel: AutofitLabel): Unit = {
-    private def onResize(autofitLabel: ScalableLabel): Unit = {
+    private def onResize(autofitLabel: AutofitLabel): Unit = {
 
         sizePanel.update(autofitLabel.details)
     }

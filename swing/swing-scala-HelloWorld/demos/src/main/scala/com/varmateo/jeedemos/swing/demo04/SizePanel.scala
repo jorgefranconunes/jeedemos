@@ -52,7 +52,7 @@ final class SizePanel private () {
     /**
      * 
      */
-    def update(details: ScalableLabelDetails): Unit = {
+    def update(details: AutofitLabelDetails): Unit = {
 
         val panelSize: Dimension = details.size
         val textBoxSize: Dimension = details.textBoxSize
