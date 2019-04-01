@@ -15,6 +15,7 @@ import java.awt.event.WindowListener
 import javax.swing.JButton
 import javax.swing.JComponent
 import javax.swing.JFrame
+import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants
@@ -41,7 +42,9 @@ final class Demo04App private () {
     import Demo04App._
 
 
-    private val sizePanel: SizePanel = SizePanel.create
+    private val sizePanel: SizePanel = SizePanel.create()
+    //private val autofitLabel: AutofitLabel = AutofitLabel.create()
+    private val autofitLabel: ScalableLabel = ScalableLabel.create()
 
 
     def start(): Unit = perform(() => setupGui())
@@ -49,7 +52,7 @@ final class Demo04App private () {
 
     private def setupGui(): Unit = {
 
-        val label: JComponent = createLabel()
+        val label: JComponent = setupLabel()
         val items: Seq[BoxPanelItem] = Seq(
             Filler(label),
             Regular(sizePanel.panel),
@@ -63,12 +66,14 @@ final class Demo04App private () {
     }
 
 
-    private def createLabel(): JComponent = {
+    private def setupLabel(): JComponent = {
 
-        val label: JComponent = AutofitLabel.create("Resize this window!").component
+        val label: JLabel = autofitLabel.component
+
+        label.setText("Resize this window!")
 
         val onResizeListener: ComponentListener = new ComponentAdapter {
-            override def componentResized(event: ComponentEvent): Unit = onResize(label)
+            override def componentResized(event: ComponentEvent): Unit = onResize(autofitLabel)
         }
 
         label.addComponentListener(onResizeListener)
@@ -108,8 +113,11 @@ final class Demo04App private () {
     }
 
 
-    private def onResize(component: JComponent): Unit =
-        sizePanel.update(component.getSize)
+    //private def onResize(autofitLabel: AutofitLabel): Unit = {
+    private def onResize(autofitLabel: ScalableLabel): Unit = {
+
+        sizePanel.update(autofitLabel.details)
+    }
 
 
     private def onExit(): Unit =
