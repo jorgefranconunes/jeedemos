@@ -32,7 +32,7 @@ Main Maven POM file for the JEE-Demos project.
     <jeedemos.jetty.port>8083</jeedemos.jetty.port>
     <jeedemos.basedir>${basedir}</jeedemos.basedir>
 
-    <jetty.version>9.4.11.v20180605</jetty.version>
+    <jetty.version>9.4.12.v20180830</jetty.version>
 
   </properties>
 
@@ -56,7 +56,7 @@ Main Maven POM file for the JEE-Demos project.
 
   <dependencyManagement>
     <dependencies>
-        
+
       <!-- JUnit -->
       <dependency>
         <groupId>junit</groupId>
@@ -109,7 +109,7 @@ Main Maven POM file for the JEE-Demos project.
     <pluginManagement>
 
       <plugins>
-      
+
 
         <!-- Compiler configuration. -->
         <plugin>
@@ -231,7 +231,7 @@ Main Maven POM file for the JEE-Demos project.
           </configuration>
         </plugin>
 
-        
+
       </plugins>
 
     </pluginManagement>

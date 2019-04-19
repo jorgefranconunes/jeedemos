@@ -40,7 +40,7 @@ object Demo05App {
 
     private val APP_TITLE = "Demo05"
 
-    private val UPDATE_PERIOD: Int = 100 // milliseconds
+    private val UPDATE_PERIOD: Int = 111 // milliseconds
 
     private val TIME_FORMATTER: DateTimeFormatter =
         new DateTimeFormatterBuilder()
@@ -52,6 +52,12 @@ object Demo05App {
 }
 
 
+/**
+ * This class makes use of AutofitLabel in a non-optimal way. Each
+ * time the text of AutofitLabel is changed the font size calculation
+ * will be performed. In this specific scenario the font size
+ * calculations need only to be performed when the label is resized.
+ */
 final class Demo05App private () {
 
     import Demo05App._
