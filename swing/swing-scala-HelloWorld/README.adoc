@@ -19,4 +19,7 @@ Running the demos:
 
 ./gradlew :demos:manualTest \
     -PmainClass=com.varmateo.jeedemos.swing.demo04.Demo04Main
+
+./gradlew :demos:manualTest \
+    -PmainClass=com.varmateo.jeedemos.swing.demo04.Demo05Main
 ----
