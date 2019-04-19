@@ -8,14 +8,13 @@ package com.varmateo.jeedemos.swing.demo04
 
 import java.awt.Dimension
 import java.awt.Font
-//import java.awt.Insets
-import java.awt.font.FontRenderContext
-import java.awt.geom.Rectangle2D
 import java.awt.Graphics
 import java.awt.Graphics2D
-//import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.SwingConstants
+
+import com.varmateo.jeedemos.swing.FontFitResult
+import com.varmateo.jeedemos.swing.FontFitter
 
 
 case class AutofitLabelDetails(
@@ -76,8 +75,6 @@ final class AutofitLabel private () {
 
             val fittingFont: Font = currentFittingFont(g)
             g.setFont(fittingFont)
-
-            println(s"**** Panel: ${getSize().width}x${getSize().height}; Text: ${currentTextBoxSize.width}x${currentTextBoxSize.height}; Font: ${this.currentFont.getSize2D}")
 
             super.paintComponent(g)
         }
@@ -141,79 +138,17 @@ final class AutofitLabel private () {
 
         private def fittingFont(g2: Graphics2D): Font = {
 
-            val (desiredFont: Font, textBoxSize: Dimension) = findFittingFont(
-                text = getText,
-                bounds = getSize,
-                baseFont = g2.getFont,
-                context = g2.getFontRenderContext)
+            val FontFitResult(_, _, desiredFont: Font, textBoxSize: Dimension) =
+                FontFitter.findFittingFont(
+                    text = getText,
+                    bounds = getSize,
+                    g2 = g2)
 
             this.currentTextBoxSize = textBoxSize
 
             desiredFont
         }
 
-
-        private def findFittingFont(
-            text: String,
-            bounds: Dimension,
-            baseFont: Font,
-            context: FontRenderContext): (Font, Dimension) = {
-
-            val boundsWidth: Int = bounds.width
-            val boundsHeight: Int = bounds.height
-            var lowerSize: Float = 4.0f
-            var upperSize: Float = 288.0f
-            var candidateSize: Float = baseFont.getSize2D
-            var candidateFont: Font = baseFont
-            var textSize: Dimension = sizeOfText(text, candidateFont, context)
-            var isFontFound: Boolean = false
-
-            do {
-                if ( ((upperSize - lowerSize) / lowerSize) <= 0.01f ) {
-                    isFontFound = true
-                } else if ( isAcceptableSize(textSize, bounds) ) {
-                    isFontFound = true
-                } else {
-                    if ( (textSize.width > boundsWidth) || (textSize.height > boundsHeight) ) {
-                        upperSize = candidateSize
-                    } else {
-                        lowerSize = candidateSize
-                    }
-                    candidateSize = (upperSize + lowerSize) / 2.0f
-                    candidateFont = baseFont.deriveFont(candidateSize)
-                    textSize = sizeOfText(text, candidateFont, context)
-                }
-
-            } while ( !isFontFound )
-
-            if ( (textSize.width > boundsWidth) || (textSize.height > boundsHeight) ) {
-                candidateSize = lowerSize
-                candidateFont = baseFont.deriveFont(candidateSize)
-                textSize = sizeOfText(text, candidateFont, context)
-            }
-
-            (candidateFont, textSize)
-        }
-
-
-        private def isAcceptableSize(
-            textSize: Dimension,
-            bounds: Dimension): Boolean =
-            ((textSize.width == bounds.width) && (textSize.height <= bounds.height)) ||
-                ((textSize.width <= bounds.width) && (textSize.height == bounds.height))
-
-
-        private def sizeOfText(
-            text: String,
-            font: Font,
-            context: FontRenderContext): Dimension = {
-
-            val bounds: Rectangle2D = font.getStringBounds(text, context)
-
-            new Dimension(
-                Math.ceil(bounds.getWidth).toInt,
-                Math.ceil(bounds.getHeight).toInt)
-        }
     }
 
 }
