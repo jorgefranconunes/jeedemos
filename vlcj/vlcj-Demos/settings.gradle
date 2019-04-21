@@ -1,0 +1,4 @@
+rootProject.name='jeedemos'
+
+//include 'common'
+include 'demos'

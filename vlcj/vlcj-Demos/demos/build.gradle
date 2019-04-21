@@ -1,0 +1,17 @@
+/**************************************************************************
+ *
+ * Copyright (c) 2019 Jorge Nunes
+ *
+ **************************************************************************/
+
+plugins {
+    id "scala"
+}
+
+
+dependencies {
+//    implementation project(":common")
+
+    implementation "org.scala-lang:scala-library:${scalaVersion}"
+    implementation "uk.co.caprica:vlcj:${vlcjVersion}"
+}

@@ -1,0 +1,20 @@
+= Vlcj demos
+
+
+== Play video in plain window
+
+Plays a video file in a plain window.
+
+----
+./gradlew :demos:manualTest \
+    -PmainClass=com.varmateo.jeedemos.vlcj.demo01.Demo01Main \
+    -Pargs1=${HOME}/tmp/big_buck_bunny_720p_h264.mov
+----
+
+Plays video originating from a connected camera.
+
+----
+./gradlew :demos:manualTest \
+    -PmainClass=com.varmateo.jeedemos.vlcj.demo01.Demo01Main \
+    -Pargs1=v4l2:///dev/video0
+----

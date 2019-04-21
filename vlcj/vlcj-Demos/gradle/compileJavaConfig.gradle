@@ -1,0 +1,21 @@
+/**************************************************************************
+ *
+ * Copyright (c) 2019 Jorge Nunes
+ *
+ * Java compiler configuration
+ *
+ **************************************************************************/
+
+
+compileJava {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+    options.compilerArgs.addAll([
+        "-Xlint",
+        "-Xlint:-serial",
+        "-Xlint:-processing",
+    ])
+
+    options.annotationProcessorGeneratedSourcesDirectory =
+        project.file("build/generated/src/main/java")
+}
