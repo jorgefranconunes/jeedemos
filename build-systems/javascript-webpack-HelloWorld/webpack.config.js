@@ -3,11 +3,11 @@
  */
 
 const fs = require("fs");
-const path = require('path');
+const path = require("path");
 const R = require("ramda");
 
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 
 const buildModuleExports = () => (
@@ -15,8 +15,8 @@ const buildModuleExports = () => (
         mode: "development",
         entry: buildEntryMap(pathOf("./src/main/javascript/varmateo/demo"), /demo.*\.js$/),
         output: {
-            filename: '[name].js',
-            path: pathOf('dist')
+            filename: "[name].js",
+            path: pathOf("dist")
         },
         resolve: {
             modules: [
@@ -25,7 +25,7 @@ const buildModuleExports = () => (
             ],
         },
         plugins: [
-            new CleanWebpackPlugin(['dist']),
+            new CleanWebpackPlugin(["dist"]),
             new CopyWebpackPlugin([
                 {
                     from: pathOf("./src/main/assets"),
@@ -34,7 +34,7 @@ const buildModuleExports = () => (
         ],
         devtool: "inline-source-map",
         devServer: {
-            contentBase: pathOf('./dist'),
+            contentBase: pathOf("./dist"),
             port: 8080,
         },
     }

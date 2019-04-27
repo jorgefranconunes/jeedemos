@@ -4,7 +4,8 @@
 
 import MessageFormat from "varmateo/text/MessageFormat"
 
-const assert = require("assert");
+//const assert = require("assert");
+import assert from "assert"
 
 
 describe("MessageFormat", function() {
