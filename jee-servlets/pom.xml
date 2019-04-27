@@ -32,7 +32,7 @@ Main Maven POM file for the JEE-Demos project.
     <jeedemos.jetty.port>8083</jeedemos.jetty.port>
     <jeedemos.basedir>${basedir}</jeedemos.basedir>
 
-    <jetty.version>9.4.12.v20180830</jetty.version>
+    <jetty.version>9.4.17.v20190418</jetty.version>
 
   </properties>
 
@@ -291,7 +291,7 @@ Main Maven POM file for the JEE-Demos project.
           </reportSet>
         </reportSets>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
@@ -414,6 +414,6 @@ Main Maven POM file for the JEE-Demos project.
       <url>file://.</url>
     </site>
   </distributionManagement>
-    
+
 
 </project>
