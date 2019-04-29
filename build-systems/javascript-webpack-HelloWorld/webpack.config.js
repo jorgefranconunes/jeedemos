@@ -21,7 +21,7 @@ const buildModuleExports = () => (
         resolve: {
             modules: [
                 pathOf("./src/main/javascript"),
-                "node_modules",
+                pathOf("./node_modules"),
             ],
         },
         plugins: [

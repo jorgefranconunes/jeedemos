@@ -4,7 +4,6 @@
 
 import MessageFormat from "varmateo/text/MessageFormat"
 
-//const assert = require("assert");
 import assert from "assert"
 
 
@@ -19,13 +18,23 @@ describe("MessageFormat", function() {
         assert.equal(actualResult, expectedResult);
     });
 
-    it("Should replace format placeholder", function() {
-        const fmt = "Hello, {0}!";
-        const fmtArg = "world";
+    it("Should replace format placeholders", function() {
+        const fmt = "{0}, {1}!";
+        const fmtArgs = [ "Hello", "world" ];
 
-        const actualResult = MessageFormat.format(fmt, fmtArg);
+        const actualResult = MessageFormat.format(fmt, ...fmtArgs);
         const expectedResult = "Hello, world!";
 
         assert.equal(actualResult, expectedResult);
-    })
+    });
+
+    it("Should keep missing placeholders", function() {
+        const fmt = "{0}, {1}!";
+        const fmtArgs = [ "Hello" ];
+
+        const actualResult = MessageFormat.format(fmt, ...fmtArgs);
+        const expectedResult = "Hello, {1}!"
+
+        assert.equal(actualResult, expectedResult);
+    });
 });

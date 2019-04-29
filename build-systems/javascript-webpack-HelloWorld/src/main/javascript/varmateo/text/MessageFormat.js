@@ -15,7 +15,10 @@ export default class MessageFormat {
      */
     static format(fmt, ...fmtArgs) {
 
-        const getter  = (...args) => fmtArgs[args[1]];
+        const getter  = (...args) => {
+            const index = args[1];
+            return (index < fmtArgs.length) ? fmtArgs[index] : `{${index}}`;
+        }
 
         return fmt.replace(/\{(\d+)\}/g, getter);
     }

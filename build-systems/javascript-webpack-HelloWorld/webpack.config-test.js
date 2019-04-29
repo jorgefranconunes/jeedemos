@@ -6,6 +6,7 @@ const path = require('path');
 const nodeExternals = require("webpack-node-externals");
 const WebpackShellPlugin = require('webpack-shell-plugin');
 
+
 module.exports = {
     mode: "development",
     target: "node",
