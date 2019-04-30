@@ -6,17 +6,16 @@ const fs = require("fs");
 const path = require("path");
 
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 const buildModuleExports = () => (
     {
         mode: "development",
-        entry: [
-            pathOf("./src/main/html/index.html"),
-        ],
+        entry: pathOf("./src/main/javascript/varmateo/bootstrap/demo.js"),
         output: {
-            path: pathOf("dist")
+            path: pathOf("dist"),
+            filename: "[hash].js"
         },
         resolve: {
             modules: [
@@ -27,41 +26,26 @@ const buildModuleExports = () => (
         module: {
             rules: [
                 {
-                    test: pathOf("./src/main/html/index.html"),
-                    use: [
-                        {
-                            loader: "file-loader",
-                            options: {
-                                name: "[name].[ext]"
-                            },
-                        },
-                        "extract-loader",
-                        {
-                            loader: "html-loader",
-                            options: {
-                                attrs: ["img:src", "link:href"],
-                                root: pathOf("./node_modules"),
-                            }
-                        }
-                    ],
-                },
-                {
                     test: /\.css$/,
                     use: [
                         "file-loader",
                         "extract-loader",
-                        "css-loader",
+                        {
+                            loader: "css-loader",
+                            // options: {
+                            //     sourceMap: true,
+                            // },
+                        },
                     ],
                 }
             ]
         },
         plugins: [
             new CleanWebpackPlugin(["dist"]),
-            new CopyWebpackPlugin([
-                {
-                    from: pathOf("./src/main/assets"),
-                }
-            ]),
+            new HtmlWebpackPlugin({
+                template: pathOf("src/main/html/index.html"),
+                inject: "head",
+            }),
         ],
         devtool: "inline-source-map",
         devServer: {
