@@ -1,7 +1,7 @@
 
 lazy val commonSettings = List(
     organization := "com.example",
-    scalaVersion := "2.12.3",
+    scalaVersion := "2.13.1",
     version      := "0.1.0-SNAPSHOT",
     exportJars   := true
 )
