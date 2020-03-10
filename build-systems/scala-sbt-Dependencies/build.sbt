@@ -26,14 +26,23 @@ lazy val projCli = (project in file("cli"))
     .settings(
         name := "helloworld-cli",
         mainClass := Some("com.varmateo.Main"),
-        // packageOptions += {
-        //     val classpath = fullClasspath.in(Runtime).value
-        //     val names: Seq[String] = classpath.map(_.data).filter(_.isFile).map(x => {println(x); x.getName})
-        //     Package.ManifestAttributes("Class-Path" -> names.mkString(" "))
-        // },
         libraryDependencies ++= Seq(
             "com.varmateo.yawg" % "yawg-api" % "0.9.8"),
         exportJars := true)
+
+projCli / packageOptions += {
+    import java.util.jar.Attributes.Name
+
+    val classpath = (projCli / Compile / dependencyClasspathAsJars).value
+    val classpathNames: Seq[String] = classpath
+        .map(_.data)
+        .filter(_.isFile)
+        .map(_.getName)
+        .sorted
+
+    Package.ManifestAttributes(
+        Name.CLASS_PATH -> classpathNames.mkString(" "))
+}
 
 
 lazy val projRelease = project

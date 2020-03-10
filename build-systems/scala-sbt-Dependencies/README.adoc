@@ -15,3 +15,14 @@ To run in the development environment:
 ----
 sbt projCli/run
 ----
+
+
+To run on the command line after a build:
+
+----
+java -jar ./lib/jars/helloworld-cli_2.13-0.1.0-SNAPSHOT.jar
+----
+
+
+Useful info on sbt:
+https://kubuszok.com/2018/relearn-your-sbt/[Relearn your sbt]
