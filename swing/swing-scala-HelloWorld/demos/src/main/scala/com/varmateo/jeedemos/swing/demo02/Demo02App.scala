@@ -10,6 +10,7 @@ import javax.swing.JFrame
 import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
+import javax.swing.WindowConstants
 
 import com.varmateo.jeedemos.swing.BoxPanel
 import com.varmateo.jeedemos.swing.BoxPanelItem._
@@ -39,7 +40,7 @@ final class Demo02App private (private val labels: Seq[String]) {
             items = labels.map(Regular(_)),
             orientation = BoxPanelOrientation.X_AXIS)
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
         frame.getContentPane().add(panel)
         frame.pack()
         frame.setVisible(true)
