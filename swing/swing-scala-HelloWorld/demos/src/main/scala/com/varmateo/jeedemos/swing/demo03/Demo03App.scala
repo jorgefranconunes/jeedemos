@@ -10,6 +10,7 @@ import javax.swing.JButton
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.SwingUtilities
+import javax.swing.WindowConstants
 
 import com.varmateo.jeedemos.swing.BoxPanelOrientation
 import com.varmateo.jeedemos.swing.SameSizeBoxPanel
@@ -38,7 +39,7 @@ final class Demo03App private (private val labels: Seq[String]) {
             orientation = BoxPanelOrientation.X_AXIS)
 
         val frame: JFrame = new JFrame(Demo03App.APP_TITLE)
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
         frame.getContentPane().add(panel)
         frame.pack()
         frame.setVisible(true)
