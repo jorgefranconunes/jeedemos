@@ -1,5 +1,5 @@
-*~
 *.aux
+.bsp
 build
 dist
 .gradle
@@ -8,4 +8,7 @@ node_modules
 *.out
 *.pid
 target
+*~
+.\#*
+\#*
 

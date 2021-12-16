@@ -1,28 +1,69 @@
 = Simple sbt multi-project with dependencies
 
-A multi-project
 
+
+== Introduction
+
+A multi-project where JARs of build targets and dependencies get
+copied to directory `lib/jars`.
+
+
+== Installing sbt
+
+The following will install SBT 1.5.7 and make it available in the
+PATH. It assumes the `~/bin` directory is already present in the PATH.
+
+----
+mkdir -p ~/bin ~/local ~/tmp
+
+curl --location \
+    --output ~/tmp/sbt-1.5.7.tgz \
+    https://github.com/sbt/sbt/releases/download/v1.5.7/sbt-1.5.7.tgz
+
+tar xfz -C ~/local ~/tmp/sbt-1.5.7.tgz
+mv ~/local/sbt ~/local/sbt-1.5.7
+
+ln -s ../local/sbt-1.5.7/bin/sbt ~/bin
+----
+
+
+== Building and running
+
+Initial preparation:
+
+On a dedicated terminal execute command `./sbts`. That will start sbt
+on server mode, and enter the sbt usual console.
 
 To build:
 
 ----
-sbt package
+./sbtc package
+----
+
+The `sbtc` script can be run from any current working directory. That
+makes it particularly useful as build command from within Emacs.
+
+
+To run the application from within sbt:
+
+----
+./sbtc projCli/run
 ----
 
 
-To run in the development environment:
+To run the application on the command line after a build:
 
 ----
-sbt projCli/run
-----
-
-
-To run on the command line after a build:
-
-----
-java -jar ./lib/jars/helloworld-cli_2.13-0.1.0-SNAPSHOT.jar
+$JAVA_HOME/bin/java -jar ./lib/jars/helloworld-cli_2.13-0.1.0-SNAPSHOT.jar
 ----
 
 
-Useful info on sbt:
-https://kubuszok.com/2018/relearn-your-sbt/[Relearn your sbt]
+== More on sbt
+
+https://www.scala-sbt.org/1.x/docs/index.html[Documentation] --
+Reference manual.
+
+https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html[Installation
+instructions]
+
+https://kubuszok.com/2018/relearn-your-sbt/[Relearn your sbt] -- Useful info on sbt.

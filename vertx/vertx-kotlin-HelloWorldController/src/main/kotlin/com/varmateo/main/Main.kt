@@ -53,9 +53,10 @@ class App {
 
         val router = Router.router(vertx)
 
-        router.addRoute(controller.hello)
-        router.addRoute(controller.greetings)
-        router.addRoute(controller.greetMessage);
+        router
+            .addRoute(controller.hello)
+            .addRoute(controller.greetings)
+            .addRoute(controller.greetMessage);
 
         return router
     }

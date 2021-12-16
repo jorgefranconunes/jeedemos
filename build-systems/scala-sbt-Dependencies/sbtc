@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -eu
+#
+# Tool for running `sbt` in client mode. All command line arguments
+# are passed unchanged to the `sbt` command.
+#
+# This tool specifically ensures SBT will be executed with the
+# following conditions fulfilled:
+#
+# * The right `build.sbt` file is used without regard for what is the
+#   current working directory.
+#
+# * The JDK installation specified with JAVA_HOME environment variable
+#   is used.
+#
+# This tool is particularly useful as compile command from within
+# Emacs.
+#
+
+declare -r _scriptName="${BASH_SOURCE[0]}"
+declare -r _scriptDir="$(dirname $0)"
+
+
+function main () {
+    cd ${_scriptDir}
+    PATH=${JAVA_HOME}/bin:${PATH} sbt \
+        --batch \
+        --client \
+        --no-colors \
+        --color=never \
+        "$@" \
+    | sed --regexp-extended 's/\d027\[[0-9]+[a-zA-Z]//g'
+}
+
+
+main "$@"

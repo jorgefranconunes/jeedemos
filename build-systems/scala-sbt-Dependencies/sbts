@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -eu
+#
+# Tool for running `sbt` in server mode. All command line arguments
+# are passed unchanged to the `sbt` command.
+#
+# This tool specifically ensures SBT will be executed with the
+# following conditions fulfilled:
+#
+# * The right `build.sbt` file is used without regard for what is the
+#   current working directory.
+#
+# * The JDK installation specified with JAVA_HOME environment variable
+#   is used.
+#
+# Like the regular `sbt` command, this tool is intended for use in a
+# terminal.
+#
+
+declare -r _scriptName="${BASH_SOURCE[0]}"
+declare -r _scriptDir="$(dirname $0)"
+
+
+function main () {
+    cd ${_scriptDir}
+    PATH=${JAVA_HOME}/bin:${PATH} sbt \
+        --server
+        "$@"
+}
+
+
+main "$@"
