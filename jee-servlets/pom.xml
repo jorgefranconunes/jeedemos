@@ -32,7 +32,7 @@ Main Maven POM file for the JEE-Demos project.
     <jeedemos.jetty.port>8083</jeedemos.jetty.port>
     <jeedemos.basedir>${basedir}</jeedemos.basedir>
 
-    <jetty.version>9.4.41.v20210516</jetty.version>
+    <jetty.version>10.0.10</jetty.version>
 
   </properties>
 
