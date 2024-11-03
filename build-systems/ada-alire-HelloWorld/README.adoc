@@ -1,0 +1,165 @@
+= Simple Alire project
+
+This is work in progress. Preliminary notes only.
+
+All commands executed under Ubuntu 22.04.
+
+Useful links:
+
+* https://ada-lang.io/
+* https://alire.ada.dev/docs/
+* https://www.nongnu.org/ada-mode/
+
+
+
+
+
+== Installing Alire
+
+https://alire.ada.dev/docs/[Alire] is a source-based package manager
+for the Ada and SPARK programming languages.
+
+Some instructions on installing Alire at
+https://ada-lang.io/docs/learn/getting-started/installation
+
+
+=== Installing `alr` tool
+
+[source, sh]
+----
+mkdir -p ~/tmp
+cd ~/tmp
+wget https://github.com/alire-project/alire/releases/download/v2.0.2/alr-2.0.2-bin-x86_64-linux.zip
+
+mkdir -p ~/local/alr-2.0.2
+unzip -d ~/local/alr-2.0.2 ~/tmp/alr-2.0.2-bin-x86_64-linux.zip
+----
+
+Directory `~/local/alr-2.0.2/bin` should be added to PATH environment
+variable.
+
+
+=== Installing the tool chain
+
+----
+# Manually select the desired tool chain
+$ ~/local/alr-2.0.2/bin/alr toolchain --select
+
+Selected tool version gnat_native=14.2.1
+Selected tool version gprbuild=22.0.1
+
+# Some info
+$  alr toolchain
+CRATE       VERSION       STATUS    NOTES
+gprbuild    22.0.1        Default
+gprbuild    2021.0.0+0778 Available Provided by system package: gprbuild
+gnat_native 14.2.1
+----
+
+The tool chain comprises the gnat compiler, and the gprbuild
+tool. These were installed by the above `alr toolchain` command at
+`~/.local/share/alire/toolchains/`:
+
+* `gnat_native_14.2.1_06bb3def`
+* `gprbuild_22.0.1_24dfc1b5`
+
+[NOTE]
+====
+*TBD*
+
+We would like to have more control about what is exactlu downloaded
+from where. Alternatives that should be documented:
+
+* How to use the gnat and gprbuild that come with Ubuntu.
+
+* How to specify the specific download locations of gnat and
+  gprbuild. Required for independence from external third parties.
+====
+
+
+
+
+
+== Setting up emacs for Ada development
+
+Emacs packages to be installed:
+
+* ada-mode -- Cf. https://www.nongnu.org/ada-mode/
+* gpr-mode
+* toml-mode
+
+To finalize the installation of ada-mode package:
+
+[source, sh]
+----
+sudo apt-get install re2c
+
+cd ~/.emacs.d/elpa/ada-mode-8.1.0
+./build.sh
+./install.sh
+----
+
+The above installs some executables at `~/.local/bin`. This directory
+must be part of the PATH when launching Emacs.
+
+[NOTE]
+====
+*TBD*
+
+Is it possible to not add `~/.local/bin` to the PATH by setting some
+configurations for ada-mode package?
+====
+
+
+
+
+
+== Hello world
+
+See https://ada-lang.io/docs/learn/tutorial/hello-world
+
+----
+mkdir ~/tmp
+cd ~/tmp
+alr init --bin my_hello_world
+----
+
+The above will create a project tree populated with with a minimal (?)
+set of files.
+
+Manualy edit `src/my_hello_world.adb` to have the following content:
+
+[source, ada]
+----
+with Ada.Text_IO;
+
+procedure My_Hello_World is
+begin
+   Ada.Text_IO.Put_Line ("Hello, world!");
+end My_Hello_World;
+----
+
+Build:
+
+----
+alr build
+----
+
+Run:
+
+----
+./bin/my_hello_world
+----
+
+Build and run:
+
+----
+alr run
+----
+
+[NOTE]
+====
+*TBD*
+
+Which files must be added to version control?
+====
