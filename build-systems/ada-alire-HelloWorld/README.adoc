@@ -85,7 +85,8 @@ from where. Alternatives that should be documented:
 Emacs packages to be installed:
 
 * ada-mode -- Cf. https://www.nongnu.org/ada-mode/
-* gpr-mode
+* gpr-mode -- Cf. https://elpa.gnu.org/packages/gpr-mode.html
+* gpr-query -- Cf. https://elpa.gnu.org/packages/gpr-query.html
 * toml-mode
 
 To finalize the installation of ada-mode package:
@@ -97,6 +98,14 @@ sudo apt-get install re2c
 cd ~/.emacs.d/elpa/ada-mode-8.1.0
 ./build.sh
 ./install.sh
+
+cd ~/.emacs.d/elpa/gpr-mode-1.0.5
+./build.sh
+./install.sh
+
+~/.emacs.d/elpa/gpr-query-1.0.4
+./build.sh
+cp ./emacs_gpr_query*/bin/* ~/.local/bin
 ----
 
 The above installs some executables at `~/.local/bin`. This directory

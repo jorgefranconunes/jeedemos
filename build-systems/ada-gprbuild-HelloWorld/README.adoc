@@ -1,0 +1,25 @@
+= Simple GPRbuild project
+
+Useful links:
+
+* https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug.html
+
+
+== Installing tool chain
+
+This is for Ubuntu 22.04.
+
+----
+apt-get install \
+    gnat \
+    gprbuild
+----
+
+
+== Building
+
+----
+gprbuild ./hello_world.gpr
+----
+
+The application binary will be created at `build/bin/HelloWorld`.
