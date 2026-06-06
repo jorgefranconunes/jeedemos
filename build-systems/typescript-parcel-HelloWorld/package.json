@@ -1,0 +1,30 @@
+{
+    "name": "helloworld",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "build": "rm -rf ./dist && parcel build --public-url './' ./src/main/assets/index.html",
+        "check": "tsc --noEmit --pretty false",
+        "start": "rm -rf ./dist && parcel ./src/main/assets/index.html",
+        "test": "npm run test-build && npm run test-run",
+        "test-build": "rm -rf ./dist-test && tsc --outDir ./dist-test",
+        "test-run": "mocha --ui tdd './dist-test/**/*.test.js'"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "GPL-3.0-only",
+    "devDependencies": {
+        "@parcel/transformer-typescript-tsc": "^2.16.4",
+        "@types/chai": "^5.2.3",
+        "@types/mocha": "^10.0.10",
+        "chai": "^6.2.2",
+        "mocha": "^11.7.6",
+        "parcel": "^2.16.4",
+        "typescript": "^6.0.3"
+    },
+    "engines": {
+        "node": ">=24.14 <25",
+        "npm": "11.9.x"
+    }
+}

@@ -1,0 +1,62 @@
+{
+    // See https://www.typescriptlang.org/tsconfig/ for description of
+    // all possible parameters.
+
+    "compilerOptions": {
+	// "rootDirs": [
+	//     "./src/main/typescript",
+	//     "./src/test/typescript",
+	// ],
+
+	// File layout
+	"rootDir": "./src",
+	"outDir": "./dist",
+
+	// "paths": {
+	//     "#helloworld/*": ["./src/main/typescript/helloworld/*"],
+	//     "#varmateo/*": ["./src/main/typescript/varmateo/*"]
+	// },
+
+	// Environment settings
+	"module": "esnext",
+	"target": "esnext",
+	"moduleResolution": "bundler",
+
+	"types": [
+	    "chai",
+	    "mocha",
+	],
+
+	// Other outputs
+	"sourceMap": true,
+	"declaration": true,
+	"declarationMap": true,
+
+	// Stricter typechecking
+	"allowUnreachableCode": false,
+	"allowUnusedLabels": false,
+	"exactOptionalPropertyTypes": true,
+	"noFallthroughCasesInSwitch": true,
+	"noImplicitAny": true,
+	"noImplicitOverride": true,
+	"noImplicitReturns": true,
+	"noImplicitThis": true,
+	"noPropertyAccessFromIndexSignature": true,
+	"noUncheckedIndexedAccess": true,
+	"noUnusedLocals": true,
+	"noUnusedParameters": true,
+	"strict": true,
+
+	// More options
+	"jsx": "react-jsx",
+	"verbatimModuleSyntax": false,
+	"isolatedModules": true,
+	"noUncheckedSideEffectImports": true,
+	"moduleDetection": "force",
+	"skipLibCheck": true,
+    },
+    "include": [
+	"./src/main/typescript",
+	"./src/test/typescript",
+    ],
+}
