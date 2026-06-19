@@ -1,4 +1,4 @@
-import { format } from "#varmateo/text/message-format.js";
+import { format } from "#varmateo/text/message-format";
 
 import { expect } from "chai";
 

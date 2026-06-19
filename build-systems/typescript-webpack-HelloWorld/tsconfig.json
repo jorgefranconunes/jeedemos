@@ -5,11 +5,10 @@
     "compilerOptions": {
 	"rootDirs": [
 	    "./src/main/typescript",
-	    "./src/test/typescript",
 	],
 
 	// File layout
-	"rootDir": "./src",
+	"rootDir": "./src/main/typescript",
 	"outDir": "./dist",
 
 	"paths": {
@@ -19,7 +18,7 @@
 
 	// Environment settings
 	"module": "esnext",
-	"target": "esnext",
+	//"target": "esnext",
 	"moduleResolution": "bundler",
 
 	"types": [
@@ -49,14 +48,14 @@
 
 	// More options
 	"jsx": "react-jsx",
-	"verbatimModuleSyntax": false,
-	"isolatedModules": true,
-	"noUncheckedSideEffectImports": true,
+	//"isolatedModules": true,
+	"isolatedModules": false,
 	"moduleDetection": "force",
+	"noUncheckedSideEffectImports": true,
 	"skipLibCheck": true,
+	"verbatimModuleSyntax": false,
     },
     "include": [
 	"./src/main/typescript",
-	"./src/test/typescript",
     ],
 }

@@ -3,11 +3,14 @@
     "version": "1.0.0",
     "description": "",
     "type": "module",
+    "private": true,
     "scripts": {
+        "build": "rm -rf ./dist && webpack --config ./webpack.config.ts",
         "check": "tsc --noEmit --pretty false",
+	"start": "webpack server",
         "test": "npm run test-build && npm run test-run",
-        "test-build": "rm -rf ./dist-test && tsc --outDir ./dist-test",
-        "test-run": "mocha --ui tdd './dist-test/**/*.test.js'"
+        "test-build": "rm -rf ./dist && tsc --outDir ./dist",
+        "test-run": "mocha --ui tdd './src/test/typescript/**/*.test.ts'"
     },
     "keywords": [],
     "author": "Jorge Nunes <jorgefranconunes@gmail.com>",
@@ -18,14 +21,26 @@
     },
     "imports": {
         "#varmateo/*": {
-            "default": "./dist-test/main/typescript/varmateo/*"
+            "default": "./dist/varmateo/*.js"
         }
     },
     "devDependencies": {
         "@types/chai": "^5.2.3",
         "@types/mocha": "^10.0.10",
+        "@types/node": "^25.9.2",
         "chai": "^6.2.2",
+        "html-webpack-plugin": "^5.6.7",
         "mocha": "^11.7.6",
-        "typescript": "^6.0.3"
+        "ts-loader": "^9.6.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^6.0.3",
+        "webpack": "^5.107.2",
+        "webpack-cli": "^7.0.3",
+        "webpack-dev-server": "^5.2.4"
+    },
+    "mocha": {
+        "require": [
+            "ts-node/register"
+        ]
     }
 }
