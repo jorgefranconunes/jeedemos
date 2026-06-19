@@ -3,19 +3,18 @@
     // all possible parameters.
 
     "compilerOptions": {
-	// "rootDirs": [
-	//     "./src/main/typescript",
-	//     "./src/test/typescript",
-	// ],
+	"rootDirs": [
+	    "./src/main/typescript",
+	],
 
 	// File layout
-	"rootDir": "./src",
+	"rootDir": "./src/main/typescript",
 	"outDir": "./dist",
 
-	// "paths": {
-	//     "#helloworld/*": ["./src/main/typescript/helloworld/*"],
-	//     "#varmateo/*": ["./src/main/typescript/varmateo/*"]
-	// },
+	"paths": {
+	    "#helloworld/*": ["./src/main/typescript/helloworld/*"],
+	    "#varmateo/*": ["./src/main/typescript/varmateo/*"]
+	},
 
 	// Environment settings
 	"module": "esnext",
@@ -49,14 +48,14 @@
 
 	// More options
 	"jsx": "react-jsx",
-	"verbatimModuleSyntax": false,
-	"isolatedModules": true,
+	"isolatedModules": false,
 	"noUncheckedSideEffectImports": true,
 	"moduleDetection": "force",
+	"noUncheckedSideEffectImports": true,
 	"skipLibCheck": true,
+	"verbatimModuleSyntax": false,
     },
     "include": [
 	"./src/main/typescript",
-	"./src/test/typescript",
     ],
 }

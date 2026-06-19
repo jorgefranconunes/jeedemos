@@ -8,12 +8,21 @@
         "check": "tsc --noEmit --pretty false",
         "start": "rm -rf ./dist && parcel ./src/main/assets/index.html",
         "test": "npm run test-build && npm run test-run",
-        "test-build": "rm -rf ./dist-test && tsc --outDir ./dist-test",
-        "test-run": "mocha --ui tdd './dist-test/**/*.test.js'"
+        "test-build": "rm -rf ./dist && tsc --outDir ./dist",
+        "test-run": "mocha --ui tdd './src/test/typescript/**/*.test.ts'"
     },
     "keywords": [],
     "author": "Jorge Nunes <jorgefranconunes@gmail.com>",
     "license": "GPL-3.0-only",
+    "engines": {
+        "node": ">=24.14 <25",
+        "npm": "> 11.9.x"
+    },
+    "imports": {
+        "#varmateo/*": {
+            "default": "./dist/varmateo/*.js"
+        }
+    },
     "devDependencies": {
         "@parcel/transformer-typescript-tsc": "^2.16.4",
         "@types/chai": "^5.2.3",
@@ -21,10 +30,12 @@
         "chai": "^6.2.2",
         "mocha": "^11.7.6",
         "parcel": "^2.16.4",
+        "ts-node": "^10.9.2",
         "typescript": "^6.0.3"
     },
-    "engines": {
-        "node": ">=24.14 <25",
-        "npm": "11.9.x"
+    "mocha": {
+        "require": [
+            "ts-node/register"
+        ]
     }
 }
